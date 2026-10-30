@@ -12,6 +12,10 @@ Rules during install: do NOT install packages (npm/pip), do NOT update Codex, do
    (if `/tmp/RTD` already exists, skip cloning and reuse it.)
 3. Install (idempotent; never overwrites existing files; appends to an existing AGENTS.md):
    `bash /tmp/RTD/scripts/setup.sh <workspace_root>`
+   The Codex sandbox protects `.agents/` and `.git/` even inside the workspace, so this command
+   needs approval: request it with escalated permissions in one call. If setup exits 1
+   ("INCOMPLETE") or approval is not possible, do not work around the sandbox and do not change
+   settings; ask the human to paste the one-liner below into a terminal tab, then re-check.
 4. Confirm the result and show it to the human:
    `ls <workspace_root>/AGENTS.md <workspace_root>/.agents/skills <workspace_root>/docs ~/.agents/skills`
    Expected: `AGENTS.md`, `.agents/skills/level1` .. `level7`, `.agents/scripts/{recon,presubmit}.py`,

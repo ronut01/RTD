@@ -7,7 +7,7 @@ set -u
 HARNESS="$(cd "$(dirname "$0")/.." && pwd)"
 WS="$(cd "${1:-.}" 2>/dev/null && pwd)" || { echo "workspace not found: ${1:-.}"; exit 1; }
 MARK="<!-- RTD-HARNESS v1 -->"
-added=0; skipped=0
+added=0; skipped=0; failed=0
 
 # copy_tree SRC DST: copy every file under SRC into DST, skipping files that exist.
 copy_tree() {
@@ -17,8 +17,11 @@ copy_tree() {
     if [ -e "$dst/$rel" ]; then
       skipped=$((skipped + 1))
     else
-      mkdir -p "$(dirname "$dst/$rel")" && cp "$f" "$dst/$rel" && added=$((added + 1)) \
-        && echo "  + ${dst/#$HOME/~}/$rel"
+      if mkdir -p "$(dirname "$dst/$rel")" 2>/dev/null && cp "$f" "$dst/$rel" 2>/dev/null; then
+        added=$((added + 1)); echo "  + ${dst/#$HOME/~}/$rel"
+      else
+        failed=$((failed + 1)); echo "  ! FAILED ${dst/#$HOME/~}/$rel"
+      fi
     fi
   done < <(find "$src" -type f ! -name '.DS_Store' | sort)
 }
@@ -38,31 +41,42 @@ fi
 
 # 2. skills (workspace) + read-only helper scripts
 copy_tree "$HARNESS/.agents/skills" "$WS/.agents/skills"
-mkdir -p "$WS/.agents/scripts"
+mkdir -p "$WS/.agents/scripts" 2>/dev/null
 for s in recon.py presubmit.py; do
   if [ -e "$WS/.agents/scripts/$s" ]; then skipped=$((skipped + 1))
-  else cp "$HARNESS/scripts/$s" "$WS/.agents/scripts/$s"; added=$((added + 1)); echo "  + .agents/scripts/$s"; fi
+  elif cp "$HARNESS/scripts/$s" "$WS/.agents/scripts/$s" 2>/dev/null; then added=$((added + 1)); echo "  + .agents/scripts/$s"
+  else failed=$((failed + 1)); echo "  ! FAILED .agents/scripts/$s"; fi
 done
 
 # 3. Korean doc templates -> docs/*.md (presubmit fails while {{...}} remain)
 copy_tree "$HARNESS/docs/templates" "$WS/docs"
 
-# 4. user-level fallback so /skills still finds level1..7 if cwd differs
+# 4. user-level fallback so /skills still finds level1..7 if cwd differs (optional: failure is a warning)
+ws_failed=$failed
 copy_tree "$HARNESS/.agents/skills" "$HOME/.agents/skills"
+home_failed=$((failed - ws_failed)); failed=$ws_failed
 
 # 5. git: init if needed; set identity locally only if missing
 if ! git -C "$WS" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-  git -C "$WS" init -q && echo "  + git init"
+  git -C "$WS" init -q && echo "  + git init" || { failed=$((failed + 1)); echo "  ! FAILED git init"; }
 fi
 if [ -z "$(git -C "$WS" config user.name)" ]; then
-  git -C "$WS" config user.name "rtd-user" && echo "  + git user.name (repo-local)"
+  git -C "$WS" config user.name "rtd-user" 2>/dev/null && echo "  + git user.name (repo-local)" \
+    || { failed=$((failed + 1)); echo "  ! FAILED git config user.name"; }
 fi
 if [ -z "$(git -C "$WS" config user.email)" ]; then
-  git -C "$WS" config user.email "rtd-user@example.invalid" && echo "  + git user.email (repo-local)"
+  git -C "$WS" config user.email "rtd-user@example.invalid" 2>/dev/null && echo "  + git user.email (repo-local)" \
+    || { failed=$((failed + 1)); echo "  ! FAILED git config user.email"; }
 fi
 
-echo "== done: $added added, $skipped already present (not overwritten)"
+echo "== done: $added added, $skipped already present (not overwritten), $failed failed"
+[ "$home_failed" -gt 0 ] && echo "  ! ~/.agents/skills fallback not written ($home_failed files) - fine if /skills shows level1..7"
 echo "== recon:"
 python3 "$WS/.agents/scripts/recon.py" "$WS" || echo "  ! recon failed (python3 missing?)"
 echo
+if [ "$failed" -gt 0 ]; then
+  echo "INCOMPLETE: writes were blocked (Codex sandbox protects .agents/ and .git/)."
+  echo "Run this same command yourself in a terminal tab, or re-run it with approval/escalation."
+  exit 1
+fi
 echo "NEXT: restart Codex (exit, then run 'codex'), check /skills shows level1..level7, then type \$level1"

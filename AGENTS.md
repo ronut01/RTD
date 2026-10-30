@@ -48,6 +48,7 @@ RECORD (row in `docs/VERIFICATION.md`, line in `docs/WORKLOG.md`) -> COMMIT.
 - Each retry must change something material. After 3 failed approaches: stop, revert only
   your own edits, write what failed in WORKLOG, ask the human one precise question.
 - Commit after each verified unit: `git add -A && git commit -m "<type>: <what> (C<n>)"`.
+  `.git/` is sandbox-protected: request approval for the commit in one call; never loosen the sandbox.
   English, imperative, meaningful. **Never run `git push`** (work stays local).
 
 ## 6. Verification = real surface
