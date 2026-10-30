@@ -14,9 +14,13 @@ description: "Step 6 of 7 (verification + independent review). Use after level5 
 3. Quick risk pass on the diff (`git diff --stat` then targeted reads): input validation at
    entry points, secrets, error paths, time zones, empty/huge input. Note, do not gold-plate.
 4. Independent review, once: ask the human to open a NEW Codex session (or `/model` -> the
-   cross-review model) and paste the review prompt from PROMPTS.md "검증". The reviewer is
-   read-only and returns OKAY or ITERATE with max 3 issues, each citing a failing criterion.
+   cross-review model) and print the prompt below verbatim in a code block for them to copy,
+   replacing `<FIRST_COMMIT>` with `git rev-list --max-parents=0 HEAD` (short hash). The reviewer
+   is read-only and returns OKAY or ITERATE with max 3 issues, each citing a failing criterion.
    Non-criterion remarks are notes, not blockers. No second review round.
+   ```
+   너는 읽기 전용 리뷰어다. 파일을 수정하지 마. AGENTS.md, docs/TASK.md의 Contract, docs/VERIFICATION.md, `git diff <FIRST_COMMIT>..HEAD --stat`과 필요한 부분만 읽어. 주장은 직접 재현한 뒤에만 믿어. 결과는 한국어로: VERDICT: OKAY 또는 ITERATE / ISSUES 최대 3개(각각 실패하는 기준 C번호와 증거 파일:줄 또는 명령 출력) / NOTES 최대 3개. 기준이 요구하지 않는 코드와 실패할 수 없는 테스트도 지적해.
+   ```
 5. Fix only cited issues via `$level5`-style loop; record review result in WORKLOG.md.
 Update HANDOFF line: `Current level: 6 / Next: $level7` (or `$level5` if FAIL).
 Commit `test: verify all criteria on real surface`.

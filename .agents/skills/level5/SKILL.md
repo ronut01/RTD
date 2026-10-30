@@ -7,6 +7,8 @@ description: "Step 5 of 7 (build loop, one criterion per run). Use after level4 
 Check time first: `date "+%H:%M"` vs `Freeze:` in HANDOFF.md. If Freeze is reached, do not
 start new work: set HANDOFF `Next: $level6`, report, and send the human to `$level6` (freeze rule).
 
+Follow the ## Plan slice order in docs/TASK.md. The first $level5 run builds Slice 1 (thin end-to-end path, input to output on the real surface) and commits it before any other criterion.
+
 Pick the highest-priority `TODO`/`FAIL` row C<n> in `docs/VERIFICATION.md`.
 1. READ: only files the slice touches; grep/head for the rest.
 2. CHANGE: smallest change that can make C<n> pass. No extra features, no speculative
