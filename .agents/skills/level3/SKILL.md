@@ -1,0 +1,32 @@
+---
+name: level3
+description: "Step 3 of 7 (goal contract). Use after level2 when docs/AGREEMENT.md exists and before any planning or feature code: turns the agreement into an outcome, deliverables, binary success criteria each with scenario and evidence, assumed: constraints, out-of-scope list and a stop condition, written into docs/TASK.md."
+---
+# level3 - goal contract
+
+Write a `## Contract` section in `docs/TASK.md`:
+
+- Outcome: one sentence, user-visible result (not an activity like "implement X").
+- Deliverables: literal paths (code entry point, output files, docs README requires).
+- Criteria table, 3-7 rows, numbered C1..Cn, ordered by priority from AGREEMENT:
+  `| C1 | 통과 조건 (binary) | 실행할 명령·조작 | 남길 증거 |`
+  - Include happy path, the riskiest edge (bad/missing input, boundary value), and for
+    data tasks a hand-computed expected value from a real input row.
+  - Scenario = exact command or UI steps with concrete inputs. "잘 동작하는지 확인" is invalid.
+  - Evidence = a file path, `curl -i` output, test name, or screenshot description.
+  - If a criterion cannot fail, rewrite it.
+- Constraints: stakeholder words verbatim; your own defaults as `assumed: <x> - <reason>`.
+- Out of scope: explicit list (each with why).
+- Stop condition: "All C1..Cn PASS with evidence in VERIFICATION.md, or the Freeze time in HANDOFF.md is reached."
+- Size check: if criteria imply new modules, auth, external integration, schema or concurrency,
+  label the task HEAVY and say so; otherwise LIGHT. LIGHT tasks get the smallest structure.
+
+Copy C1..Cn as rows into `docs/VERIFICATION.md` with status `TODO`.
+Add `### D1` in DECISIONS.md for the main approach (2 alternatives considered, why chosen).
+Update HANDOFF line: `Current level: 3 / Next: $level4`. Commit `docs: add goal contract`.
+
+## Next
+Report in Korean, then STOP and wait for approval of the contract:
+- 3 lines: 기준 개수와 핵심 / 왜 이 기준인가 / 가장 불확실한 가정.
+- Next: `$level4` - 계획 1패스 점검 (모순·모호·누락·실행 불가).
+- Time: show current clock, elapsed since Start, and minutes left to Freeze (from HANDOFF.md).
