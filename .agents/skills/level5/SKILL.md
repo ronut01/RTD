@@ -5,7 +5,7 @@ description: "Step 5 of 7 (build loop, one criterion per run). Use after level4 
 # level5 - one criterion: READ -> CHANGE -> RUN -> RECORD -> COMMIT
 
 Check time first: `date "+%H:%M"` vs `Freeze:` in HANDOFF.md. If Freeze is reached, do not
-start new work: report and send the human to `$level6` (freeze rule).
+start new work: set HANDOFF `Next: $level6`, report, and send the human to `$level6` (freeze rule).
 
 Pick the highest-priority `TODO`/`FAIL` row C<n> in `docs/VERIFICATION.md`.
 1. READ: only files the slice touches; grep/head for the rest.

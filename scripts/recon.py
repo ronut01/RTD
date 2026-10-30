@@ -45,6 +45,8 @@ def check_port(port):
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         s.bind(("0.0.0.0", port))
         return "free"
+    except PermissionError:
+        return "unknown (bind blocked by sandbox/permissions)"
     except OSError as exc:
         return "busy (%s)" % exc.strerror
     finally:

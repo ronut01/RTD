@@ -10,7 +10,8 @@ description: "Step 4 of 7 (one-pass plan check). Use after level3 wrote the cont
 2. Review it once, read-only, against README + AGREEMENT + Contract:
    - Contradictions (cite both sides), ambiguous terms, missing constraints.
    - Executability: does each scenario name a real command/input that exists now?
-   - Over-engineering: anything not traced to a criterion -> remove.
+   - Over-engineering: any task not traced to a criterion, or any criterion not traced to
+     README/AGREEMENT -> remove or demote to `assumed:`.
    - Risk: the 1-2 riskiest parts (parsing, time zones, boundaries, state) get a detailed note.
 3. Verdict:
    - OKAY: plan is executable as is (default).

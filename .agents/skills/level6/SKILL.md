@@ -6,7 +6,9 @@ description: "Step 6 of 7 (verification + independent review). Use after level5 
 
 1. Fresh run, no reuse of old output: for each C<n>, run its scenario now on the real surface
    (Browser preview at 0.0.0.0:<port>, `curl -i`, or the real input file). Update evidence.
-   Build success or green tests alone do not count.
+   Build success or green tests alone do not count. PASS only if the criterion's own command
+   ran as written; if it does not exist or you used a different check, mark FAIL or NOT RUN and
+   say why. Do not add new verification scripts here.
 2. Mapping: table in VERIFICATION.md `requirement -> criterion -> test/scenario`. Flag any
    README/AGREEMENT requirement with no criterion, and any code with no requirement (scope creep).
 3. Quick risk pass on the diff (`git diff --stat` then targeted reads): input validation at

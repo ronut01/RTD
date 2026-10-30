@@ -11,8 +11,10 @@ Goal: in <=15 min the human knows the environment and what the task really asks.
    feature-freeze time the human gives; ask once if missing).
 2. Run `python3 .agents/scripts/recon.py .` once. Note python/node/npm/pip versions,
    port availability, and the timestamp-parsing line (Python 3.9 rejects `Z` in fromisoformat).
-3. Read the task `README.md` fully (it is short). For data files: `ls -la`, `wc -l`, `head -n 5`
-   only; never cat whole files.
+3. Read the task `README.md` fully (it is short). Data files: `wc -l` first. Up to ~200 lines:
+   read fully. Larger: profile with a short stdlib script (per column: distinct values, blanks,
+   formats) instead of reading. List anomalies you see (blank/odd values, case variants, mixed
+   formats, duplicate-looking rows) - each becomes an open question.
 4. Classify the task: (a) web service / API, (b) data + rules -> judgement/report, (c) other.
 5. Fill `docs/TASK.md`:
    - Facts: only what README/data literally says, with the source line.

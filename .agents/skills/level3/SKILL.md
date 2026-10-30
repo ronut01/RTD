@@ -8,12 +8,15 @@ Write a `## Contract` section in `docs/TASK.md`:
 
 - Outcome: one sentence, user-visible result (not an activity like "implement X").
 - Deliverables: literal paths (code entry point, output files, docs README requires).
-- Criteria table, 3-7 rows, numbered C1..Cn, ordered by priority from AGREEMENT:
+- Criteria table, numbered C1..Cn, ordered by priority from AGREEMENT. LIGHT: 3-5 rows.
+  Each criterion traces to a README/AGREEMENT line; your own defaults (e.g. error handling
+  nobody asked for) stay as `assumed:` notes, not criteria. Keep each cell to one short line:
   `| C1 | 통과 조건 (binary) | 실행할 명령·조작 | 남길 증거 |`
   - Include happy path, the riskiest edge (bad/missing input, boundary value), and for
     data tasks a hand-computed expected value from a real input row.
   - Scenario = exact command or UI steps with concrete inputs. "잘 동작하는지 확인" is invalid.
-  - Evidence = a file path, `curl -i` output, test name, or screenshot description.
+  - Evidence = `curl -i` status line, test name, output path, or what the preview shows; it is
+    pasted into the VERIFICATION.md row (no separate evidence files or extra scripts).
   - If a criterion cannot fail, rewrite it.
 - Constraints: stakeholder words verbatim; your own defaults as `assumed: <x> - <reason>`.
 - Out of scope: explicit list (each with why).

@@ -21,6 +21,9 @@ Each turn:
 - Ask only 1-2 per message. Prefer questions answerable in a few words or by choice.
 - When the human pastes the answer, record it in `docs/AGREEMENT.md` (question -> answer ->
   impact on criteria) and move resolved items out of TASK.md open questions.
+- Before stopping, rung 5 must have been asked at least once in plain words
+  ("판정/처리에서 빼야 하는 경우나 예외가 있나요?", "안 해도 되는 건?"), plus every data
+  anomaly from level1. Do not spend more than 2 questions drilling one topic.
 - Stop asking when you can predict the next 3 answers, or after ~20 min.
 
 Then draft the agreement (in AGREEMENT.md): 이해한 문제 / 원인 / 성공 기준 / 만들 것 /
