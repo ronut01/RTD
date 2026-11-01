@@ -7,16 +7,16 @@ description: "Step 7 of 7 (wrap-up + engineering handoff). Use after level6, whe
 1. Read the real state: `git log --oneline`, `git diff --stat <first commit>..HEAD`,
    DESIGN.md, DECISIONS.md, VERIFICATION.md, WORKLOG.md. Do not invent anything not in code or docs.
 2. Finalize docs (short, true): DESIGN.md matches the code (data flow, modules, LLM vs code),
-   VERIFICATION known weaknesses, DECISIONS "포기한 것", WORKLOG accepted/modified/rejected,
+   VERIFICATION known weaknesses, DECISIONS "포기한 것", WORKLOG accepted/modified/rejected/오류 발견,
    HANDOFF full state (`Current level: 7 / Next: handoff`).
 3. Fill `## Review Q&A` in `docs/HANDOFF.md` (Korean), one question per area below, made
    specific to this code (keep the template's areas, replace the generic wording):
-   Q1 AI 협업: AI가 제안한 것 중 받아들인 것 / 고친 것 / 거절한 것과 이유 (WORKLOG 근거)
+   Q1 AI 협업: AI가 제안한 것 중 받아들인 것 / 고친 것 / 거절한 것과 이유 (WORKLOG 근거) - 오류 발견 행이 있으면 하나는 반드시 포함
    Q2 결정론 코드와 LLM(또는 사람 판단)의 경계를 왜 거기에 두었나, 비용·위험은
    Q3 데이터 흐름: 사용자 입력 -> 검증 -> 상태 변화 -> 저장·표시, 각 단계의 책임
    Q4 장애·오류가 나면 어떻게 대응하나, 가장 취약한 곳은
    Q5 구현한 것과 일부러 구현하지 않은 것, 그 이유
-   Q6 결과를 어떻게 믿을 수 있나: 데이터 판단(정제·가정)과 검증 방법(기준선 비교, 현실성 점검)
+   Q6 결과를 어떻게 믿을 수 있나: 데이터 판단(정제·가정)과 검증 방법(기준선 비교, 현실성 점검) - 오류 발견 행의 검증 근거 인용
    Q7 핵심 방법을 고른 이유와 버린 대안 (DESIGN 비교표, D1)
    Answer each in 2-3 short sentences (plain words, ~60 Korean characters each) the human
    can say aloud from memory in 5 minutes without AI, in this order:

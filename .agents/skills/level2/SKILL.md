@@ -30,8 +30,8 @@ Each turn:
 - Propose 2-3 candidate questions (Korean, one sentence each, no solution words such as
   "DB", "React", "API"), each with your guessed answer. Mark the one you recommend.
 - Ask only 1-2 per message. Prefer questions answerable in a few words or by choice.
-- When the human pastes the answer, record it in `docs/AGREEMENT.md` (question -> answer ->
-  impact on criteria) and move resolved items out of TASK.md open questions.
+- When the human pastes the answer, record it in `docs/AGREEMENT.md` as row `A<n>` (question
+  -> answer -> impact on criteria) and move resolved items out of TASK.md open questions.
 - Before stopping, rung 5 must have been asked at least once in plain words
   ("판정/처리에서 빼야 하는 경우나 예외가 있나요?", "안 해도 되는 건?"), rung 6 at least
   twice (what "good" means + one limit), plus every data anomaly from level1. Do not spend
