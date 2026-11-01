@@ -9,6 +9,9 @@ description: "Step 6 of 7 (verification + independent review). Use after level5 
    Build success or green tests alone do not count. PASS only if the criterion's own command
    ran as written; if it does not exist or you used a different check, mark FAIL or NOT RUN and
    say why. Do not add new verification scripts here.
+   Core quality: re-run the evaluator on the real input; paste `metric | baseline | ours` and
+   the realism bounds into the core criterion's evidence. Read 2-3 concrete output rows as a
+   practitioner would (one typical, one extreme) and say whether they make sense.
 2. Mapping: table in VERIFICATION.md `requirement -> criterion -> test/scenario`. Flag any
    README/AGREEMENT requirement with no criterion, and any code with no requirement (scope creep).
 3. Quick risk pass on the diff (`git diff --stat` then targeted reads): input validation at
@@ -19,7 +22,7 @@ description: "Step 6 of 7 (verification + independent review). Use after level5 
    is read-only and returns OKAY or ITERATE with max 3 issues, each citing a failing criterion.
    Non-criterion remarks are notes, not blockers. No second review round.
    ```
-   너는 읽기 전용 리뷰어다. 파일을 수정하지 마. AGENTS.md, docs/TASK.md의 Contract, docs/VERIFICATION.md, `git diff <FIRST_COMMIT>..HEAD --stat`과 필요한 부분만 읽어. 주장은 직접 재현한 뒤에만 믿어. 결과는 한국어로: VERDICT: OKAY 또는 ITERATE / ISSUES 최대 3개(각각 실패하는 기준 C번호와 증거 파일:줄 또는 명령 출력) / NOTES 최대 3개. 기준이 요구하지 않는 코드와 실패할 수 없는 테스트도 지적해.
+   너는 읽기 전용 리뷰어다. 파일을 수정하지 마. AGENTS.md, docs/TASK.md의 Contract, docs/VERIFICATION.md, `git diff <FIRST_COMMIT>..HEAD --stat`과 필요한 부분만 읽어. 주장은 직접 재현한 뒤에만 믿어. 결과는 한국어로: VERDICT: OKAY 또는 ITERATE / ISSUES 최대 3개(각각 실패하는 기준 C번호와 증거 파일:줄 또는 명령 출력) / NOTES 최대 3개. 기준이 요구하지 않는 코드와 실패할 수 없는 테스트도 지적해. docs/DESIGN.md의 핵심 산출물이 기준선보다 실제로 나은지, 현업 담당자가 보기에 말이 되는 결과인지(자원 수, 이용률, 극단값)도 실제 실행 결과로 판단해.
    ```
 5. Fix only cited issues via `$level5`-style loop; record review result in WORKLOG.md.
 Update HANDOFF line: `Current level: 6 / Next: $level7` (or `$level5` if FAIL).

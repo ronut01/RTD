@@ -16,6 +16,10 @@ Goal: in <=15 min the human knows the environment and what the task really asks.
    formats) instead of reading. List anomalies you see (blank/odd values, case variants, mixed
    formats, duplicate-looking rows) - each becomes an open question.
 4. Classify the task: (a) web service / API, (b) data + rules -> judgement/report, (c) other.
+   Then name the **core**: the one output a domain expert would judge as good or bad (see
+   AGENTS.md §3). Write it in TASK.md as `핵심 산출물: <what> - 좋고 나쁨을 가르는 것: <guess>`.
+   If the data hints at an existing/current process (current plan, past records, costs), note
+   it: it is the natural baseline for level4.
 5. Fill `docs/TASK.md`:
    - Facts: only what README/data literally says, with the source line.
    - Assumptions: `assumed: <x> - <why>`.

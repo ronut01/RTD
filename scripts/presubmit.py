@@ -11,7 +11,7 @@ import subprocess
 import sys
 
 REQUIRED_DOCS = ["TASK.md", "AGREEMENT.md", "DECISIONS.md", "VERIFICATION.md",
-                 "WORKLOG.md", "HANDOFF.md"]
+                 "WORKLOG.md", "HANDOFF.md", "DESIGN.md"]
 PLACEHOLDER = re.compile(r"\{\{[^}\n]*\}\}")
 SECRET_PATTERNS = [
     ("aws access key", re.compile(r"AKIA[0-9A-Z]{16}")),

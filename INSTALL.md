@@ -19,7 +19,7 @@ Rules during install: do NOT install packages (npm/pip), do NOT update Codex, do
 4. Confirm the result and show it to the human:
    `ls <workspace_root>/AGENTS.md <workspace_root>/.agents/skills <workspace_root>/docs ~/.agents/skills`
    Expected: `AGENTS.md`, `.agents/skills/level1` .. `level7`, `.agents/scripts/{recon,presubmit}.py`,
-   `docs/{TASK,AGREEMENT,DECISIONS,VERIFICATION,WORKLOG,HANDOFF}.md`, and level1..level7 under
+   `docs/{TASK,AGREEMENT,DESIGN,DECISIONS,VERIFICATION,WORKLOG,HANDOFF}.md`, and level1..level7 under
    `~/.agents/skills` (fallback). setup.sh already printed the `recon.py` output; summarize it
    in Korean in 3 lines (python/node versions, port, anything missing).
 5. Tell the human (in Korean): "Codex를 종료했다가 다시 `codex`로 시작하고, `/skills`에서

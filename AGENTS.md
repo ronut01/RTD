@@ -16,8 +16,8 @@ That stop condition binds you. When it holds, stop. Extra polish after it is a d
 - Mid-task messages steer the current task. Status question -> one sentence, keep going.
 
 ## 2. Stages and handoff point
-Work follows skills `$level1`..`$level7` (recon -> interview -> goal contract -> plan check ->
-build loop -> verify -> wrap). If the current stage is unclear, read the first lines of
+Work follows skills `$level1`..`$level7` (recon -> interview -> goal contract -> approach +
+design -> build loop -> verify -> wrap). If the current stage is unclear, read the first lines of
 `docs/HANDOFF.md` (`Current level: N / Next: $levelM`) and continue from there.
 At the end of every stage:
 1. Update `docs/HANDOFF.md` line 1-2 (Current level / Next).
@@ -25,21 +25,35 @@ At the end of every stage:
 3. Say the next command (`$levelN`) and a target clock time, then STOP and wait for approval.
 Never chain stages on your own. No autonomous long loops.
 
-## 3. Scope (over-engineering is a defect)
-- Build only what README + agreed criteria require. Smallest correct change.
-- Do not add auth, caching, retries, queues, config layers, plugins, or abstractions that no
-  criterion asks for. One-use helpers: inline them.
-- Deterministic logic (rules, thresholds, scoring, parsing) lives in plain code, not in prompts.
-  AI is for interpretation and drafting only.
-- Ambiguity: choose the simplest reading consistent with the docs, write it as
+## 3. Scope: deep core, thin periphery
+- The **core** is the one output the task is really judged on - the thing a domain expert
+  would call good or bad (a plan, route, assignment, schedule, judgement, ranking, forecast...).
+  `docs/DESIGN.md` names it. The core is NOT held to "smallest change": it must use a
+  recognised method for its problem class (chosen in level4), be measured by quality metrics
+  against a baseline, and be realistic to a practitioner. A trivial core - a rule that sidesteps
+  the real trade-off, or a result no practitioner would run - is a defect even if tests pass.
+- Everything else is **periphery**: build only what README + agreed criteria require, smallest
+  correct change. No auth, caching, retries, queues, config layers, plugins, or abstractions
+  that no criterion asks for. One-use helpers: inline them.
+- Deterministic logic (rules, thresholds, scoring, optimisation, parsing) lives in plain code,
+  not in prompts. If the product itself calls an LLM, use it only where free-text judgement is
+  needed, and record in DESIGN.md why that part is LLM and what it costs (latency, money,
+  non-determinism, how its output is validated).
+- Ambiguity: for periphery, choose the simplest reading consistent with the docs; for the core,
+  choose the most realistic reading (what the business would actually run). Write it as
   `assumed: <constraint> - <reason>` in `docs/TASK.md` or `docs/DECISIONS.md`, continue.
   Ask the human only for irreversible or product-level decisions.
+- No stated limit on a resource (vehicles, staff, rooms, slots, budget...) is not permission to
+  use unlimited amounts; using less of it is usually part of the real objective. Confirm with
+  the stakeholder or record it as `assumed:`.
 
-## 4. Contract before code
-No feature code before `docs/TASK.md` has binary criteria. Each criterion has:
-pass condition / exact command or UI action / evidence path. A criterion that cannot fail is
-not a criterion. A test that cannot fail is not evidence. Tests must not compute the expected
-value the same way the code does.
+## 4. Contract and design before code
+No feature code before `docs/TASK.md` has binary criteria (level3) and `docs/DESIGN.md` has
+the chosen core approach approved by the human (level4). Get the design right once instead of
+rewriting later. Each criterion has: pass condition / exact command or UI action / evidence
+path. At least one criterion measures core quality with numbers against a baseline.
+A criterion that cannot fail is not a criterion. A test that cannot fail is not evidence.
+Tests must not compute the expected value the same way the code does.
 
 ## 5. Build loop (per criterion)
 READ (only the files involved) -> CHANGE (minimal) -> RUN (the criterion's scenario) ->
@@ -57,11 +71,24 @@ Green tests are not proof that it works. Verify on the real surface:
   (set port/URL, refresh). Report what the human should see.
 - HTTP API: `curl -i` against the running server (status + body).
 - CLI / data tool: run it on the real input files from the task; check the output file.
+- Core output: print its quality metrics on the real input next to the baseline, then a
+  realism check (any absurd number: utilisation, counts, extremes, unserved items?). Compute
+  numbers in code and quote the output; never estimate them in chat.
 Record evidence (command + key output, or file path) per criterion. Zero verified criteria
 means FAIL, not "done". Say "NOT RUN" when you did not run something; never imply you did.
 Run only the tests a change needs; do not re-run the same thing without a reason.
 
-## 7. Token and time economy
+## 7. The human must understand the code
+The human will later explain, without AI, why the code is built this way, how data flows,
+and where it breaks. So:
+- Keep `docs/DESIGN.md` as the map: core problem and method, data flow, state and who owns
+  it, roles, deterministic code vs LLM, modules with one-line jobs. Keep it true to the code.
+- After each core slice, give a Korean explain-back (<=6 lines): input -> steps -> output, why
+  this method over the runner-up, the weakest point (`file:function`).
+- Write code the human can read in one pass: plain functions, named constants, short comments
+  only where the reason is not obvious.
+
+## 8. Token and time economy
 - Never read big files whole: `head -n 40`, `wc -l`, column/schema summaries, `grep -n`.
 - No polling, no fixed sleeps, no loops that wait. Start long processes in a separate terminal
   tab the human controls; do not close the tab that runs the server.
@@ -70,7 +97,7 @@ Run only the tests a change needs; do not re-run the same thing without a reason
   its evidence yourself.
 - Replies to the human: Korean, main point first, short. No unrequested warnings.
 
-## 8. Environment safety
+## 9. Environment safety
 - Do not touch `~/.codex/`, global config, IDE-managed settings, MCP connections,
   or any managed/connection process. Do not update Codex even if prompted.
 - No package installs unless the task truly needs them and the human approves; prefer stdlib.
@@ -78,21 +105,22 @@ Run only the tests a change needs; do not re-run the same thing without a reason
 - Do not kill processes you did not start. Watch memory (OOM is not compensated).
 - If the human has a file open in the editor, tell them which files you changed (save conflicts).
 
-## 9. Records are reviewed
+## 10. Records are reviewed
 Reviewers compare docs against code and commits. Docs must be short and true.
-- `docs/TASK.md` facts / assumptions / open questions / not doing / criteria
+- `docs/TASK.md` facts / assumptions / open questions / not doing / criteria / plan
 - `docs/AGREEMENT.md` what the stakeholder confirmed
+- `docs/DESIGN.md` core problem, method comparison, metrics + baseline, data flow, roles
 - `docs/DECISIONS.md` `### D<n>` decision / alternatives / reason / what we gave up
 - `docs/VERIFICATION.md` `| C<n> |` PASS/FAIL + evidence + known weakness
-- `docs/WORKLOG.md` what was delegated to AI, accepted / modified / rejected and why
+- `docs/WORKLOG.md` what AI proposed, accepted / modified / rejected and why
 - `docs/HANDOFF.md` state for a fresh session + Review Q&A
 No `{{...}}` placeholders may remain at handoff: `python3 .agents/scripts/presubmit.py .`
 (exit 0 pass, 1 fail, 2 nothing checked).
 
-## 10. Session handoff
+## 11. Session handoff
 Do not rely on compaction. At the handoff checkpoints the human names (or when context feels long), update
 `docs/HANDOFF.md` fully, commit, and tell the human to start a fresh Codex session with the
 prompt in HANDOFF.md.
 
-## 11. Language
+## 12. Language
 Human-facing reports and docs/: Korean. Code, identifiers, commit messages: English.

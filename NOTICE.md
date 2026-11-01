@@ -12,6 +12,7 @@
 | github/spec-kit (MIT, © GitHub, Inc.) | templates/commands/specify, clarify, analyze | 질문을 영향도 순으로 3~7개만, 나머지는 기본값과 Assumptions, 명세·계획 교차 점검 | level1·3·4 |
 | hamjoon2003/sk-hynix-2nd-harness (MIT) | scripts/preflight.py | "검사 0개 = exit 2" 규칙, 기능 동결 시각 | presubmit.py, level5 |
 | hongkevin/cofathon-prep (MIT) | recon | fromisoformat 'Z' 함정 점검, 기대값을 코드와 같은 방식으로 계산하지 않기 | recon.py, AGENTS §4 |
+| AgenticLab-SH/sh-workflows (MIT) | docs/OPTIMIZATION_PLAYBOOK, role-separated-design | 정식화 → 기준선 → 개선 → 비교 순서, 기준선 없이 "최적"이라 하지 않기, 무거운 계산은 운영자 동작에서 한 번 실행·저장 | AGENTS §3·6, level4·5, DESIGN.md |
 
 ## 라이선스 불명확 또는 비MIT (아이디어만, 문장 미사용)
 - code-yeongyu/oh-my-openagent (NOASSERTION): routing line과 stop condition, ask-type 분류, 목표 계약 필드, 1패스 계획 점검 판정(OKAY/ITERATE/REJECT, 최대 3이슈), READ→CHANGE→RUN 루프, 3회 실패 규칙.
