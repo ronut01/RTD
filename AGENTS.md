@@ -21,9 +21,10 @@ design -> build loop -> verify -> wrap). If the current stage is unclear, read t
 `docs/HANDOFF.md` (`Current level: N / Next: $levelM`) and continue from there.
 At the end of every stage:
 1. Update `docs/HANDOFF.md` line 1-2 (Current level / Next).
-2. Report to the human in Korean, exactly 3 lines: 무엇을 바꿨나 / 왜 / 어디서 깨질 수 있나.
+2. Self-check silently (no PASS without its own scenario run, no decision without a DECISIONS/WORKLOG line, nothing suspiciously smooth left unexamined), then report in Korean, exactly 3 lines: 무엇을 바꿨나 / 왜 / 어디서 깨질 수 있나.
 3. Say the next command (`$levelN`) and a target clock time, then STOP and wait for approval.
-Never chain stages on your own. No autonomous long loops.
+4. Do not rely on compaction: at the human's handoff checkpoints (or when context feels long) update docs/HANDOFF.md fully, commit, and tell the human to start a fresh Codex session with its prompt.
+Never chain stages on your own. Inside `$level5` only `periphery` slices chain; every core slice, retry-ended FAIL or criterion-changing assumption stops.
 
 ## 3. Scope: deep core, thin periphery
 - The **core** is the one output the task is really judged on - the thing a domain expert
@@ -42,7 +43,7 @@ Never chain stages on your own. No autonomous long loops.
 - Ambiguity: for periphery, choose the simplest reading consistent with the docs; for the core,
   choose the most realistic reading (what the business would actually run). Write it as
   `assumed: <constraint> - <reason>` in `docs/TASK.md` or `docs/DECISIONS.md`, continue.
-  Ask the human only for irreversible or product-level decisions.
+  Ask the human only for irreversible or product-level decisions; inside level5 an assumption that changes a criterion or the core ends the chain.
 - No stated limit on a resource (vehicles, staff, rooms, slots, budget...) is not permission to
   use unlimited amounts; using less of it is usually part of the real objective. Confirm with
   the stakeholder or record it as `assumed:`.
@@ -55,12 +56,10 @@ path. At least one criterion measures core quality with numbers against a baseli
 A criterion that cannot fail is not a criterion. A test that cannot fail is not evidence.
 Tests must not compute the expected value the same way the code does.
 
-## 5. Build loop (per criterion)
-READ (only the files involved) -> CHANGE (minimal) -> RUN (the criterion's scenario) ->
-RECORD (row in `docs/VERIFICATION.md`, line in `docs/WORKLOG.md`) -> COMMIT.
+## 5. Build loop (per Plan slice)
+READ (only the files involved) -> CHANGE (minimal) -> RUN (the scenario, plus earlier criteria the change touched) -> CLEAN (stop what you started; `git status --short` shows only intended files) -> RECORD (row in docs/VERIFICATION.md, row in docs/WORKLOG.md) -> COMMIT.
 - Reproduce a bug before fixing it. Never edit a test just to make it pass.
-- Each retry must change something material. After 3 failed approaches: stop, revert only
-  your own edits, write what failed in WORKLOG, ask the human one precise question.
+- Each retry must change something material. Same failure output twice, or 3 failed approaches: stop, revert only your own edits, write what failed in WORKLOG, ask the human one precise question.
 - Commit after each verified unit: `git add -A && git commit -m "<type>: <what> (C<n>)"`.
   `.git/` is sandbox-protected: request approval for the commit in one call; never loosen the sandbox.
   English, imperative, meaningful. **Never run `git push`** (work stays local).
@@ -90,12 +89,10 @@ and where it breaks. So:
 
 ## 8. Token and time economy
 - Never read big files whole: `head -n 40`, `wc -l`, column/schema summaries, `grep -n`.
-- No polling, no fixed sleeps, no loops that wait. Start long processes in a separate terminal
-  tab the human controls; do not close the tab that runs the server.
+- No polling, no fixed sleeps, no loops that wait. The human runs the long-lived server in a tab they control; for verification you may start your own instance on a spare port and must stop it before you finish (CLEAN).
 - Subagents: off by default. Allowed only for one independent read-only review (level6) or a
   clearly parallel lookup; give it TASK / DELIVERABLE / SCOPE / VERIFY / STOP WHEN and check
   its evidence yourself.
-- Replies to the human: Korean, main point first, short. No unrequested warnings.
 
 ## 9. Environment safety
 - Do not touch `~/.codex/`, global config, IDE-managed settings, MCP connections,
@@ -108,20 +105,12 @@ and where it breaks. So:
 ## 10. Records are reviewed
 Reviewers compare docs against code and commits. Docs must be short and true: the human must
 be able to read any one doc in 2 minutes (Contract ~35 lines, DESIGN.md ~80 lines).
-- `docs/TASK.md` facts / assumptions / open questions / not doing / criteria / plan
-- `docs/AGREEMENT.md` what the stakeholder confirmed
-- `docs/DESIGN.md` core problem, method comparison, metrics + baseline, data flow, roles
-- `docs/DECISIONS.md` `### D<n>` decision / alternatives / reason / what we gave up
-- `docs/VERIFICATION.md` `| C<n> |` PASS/FAIL + evidence + known weakness
-- `docs/WORKLOG.md` what AI proposed, accepted / modified / rejected and why
-- `docs/HANDOFF.md` state for a fresh session + Review Q&A
+Docs: TASK (facts, assumptions, questions, not doing, Contract, Plan), AGREEMENT (answers `A<n>`),
+  DESIGN (core method, metrics, data flow, roles), DECISIONS (`### D<n>`), VERIFICATION (`| C<n> |`
+  + evidence), WORKLOG (AI proposal -> 채택/수정/거절/오류 발견), HANDOFF (state + Review Q&A).
+Trace IDs: stakeholder answer A<n> -> criterion C<n> -> decision D<n> -> commit message (C<n>); cite them wherever they apply.
 No `{{...}}` placeholders may remain at handoff: `python3 .agents/scripts/presubmit.py .`
 (exit 0 pass, 1 fail, 2 nothing checked).
 
-## 11. Session handoff
-Do not rely on compaction. At the handoff checkpoints the human names (or when context feels long), update
-`docs/HANDOFF.md` fully, commit, and tell the human to start a fresh Codex session with the
-prompt in HANDOFF.md.
-
-## 12. Language
-Human-facing reports and docs/: Korean. Code, identifiers, commit messages: English.
+## 11. Language
+Human-facing reports and docs/: Korean, main point first, short. Code, identifiers, commit messages: English.
