@@ -1,43 +1,50 @@
 ---
 name: level5
-description: "Step 5 of 7 (build loop, one criterion per run). Use after level4 returned OKAY and the human chose the core method in docs/DESIGN.md, to implement exactly one pending criterion from docs/VERIFICATION.md via READ -> CHANGE -> RUN -> RECORD -> COMMIT; core slices are measured against the baseline. Repeat $level5 per criterion; switch to level6 when all pass or the Freeze time is reached."
+description: "Step 5 of 7 (build loop by Plan slice). Use after level4 returned OKAY and the human chose the core method in docs/DESIGN.md: builds the ## Plan slices of docs/TASK.md via READ -> CHANGE -> RUN -> CLEAN -> RECORD -> COMMIT. Periphery slices chain; every core slice, FAIL or criterion-changing assumption stops for the human. Repeat $level5 until all criteria pass; switch to level6 when all pass or the Freeze time is reached."
 ---
-# level5 - one criterion: READ -> CHANGE -> RUN -> RECORD -> COMMIT
+# level5 - build by Plan slice: READ -> CHANGE -> RUN -> CLEAN -> RECORD -> COMMIT
 
-Check time first: `date "+%H:%M"` vs `Freeze:` in HANDOFF.md. If Freeze is reached, do not
-start new work: set HANDOFF `Next: $level6`, report, and send the human to `$level6` (freeze rule).
+Unit = one slice of `## Plan` in docs/TASK.md, in order; Slice 1 (thin end-to-end path) first.
+If the first pending slice is `core` (unmarked = core), build only that slice, then stop.
+Otherwise chain `periphery` slices: after COMMIT print `C<n> PASS | <evidence> | <short hash>`
+and take the next one. A red run you fix inside the slice does not stop the chain. STOP at:
+the next `core` slice, a FAIL the retry rule ends, any core-quality FAIL, a new `assumed:` or
+`### D<n>` that changes a criterion or the core (other assumptions go in the receipt), a step
+only the human can do (approve, ask the stakeholder), Freeze, or all PASS.
+`$level5 C2 C3` = exactly those slices, then stop.
+Before each slice: `date "+%H:%M"` vs `Freeze:` in HANDOFF.md; at or past Freeze start nothing
+and set `Next: $level6`. Keep a live plan (`update_plan` if available, else a short list in
+chat): one step per remaining slice, `C<n> <path>: <action> - verify by <scenario>`.
 
-Follow the ## Plan slice order in docs/TASK.md. The first $level5 run builds Slice 1 (thin end-to-end path, input to output on the real surface) and commits it before any other criterion.
-
-Pick the highest-priority `TODO`/`FAIL` row C<n> in `docs/VERIFICATION.md`.
 1. READ: only files the slice touches; grep/head for the rest.
-2. CHANGE: periphery -> smallest change that can make C<n> pass, no extra features, no
-   speculative abstractions. Core -> implement the method chosen in DESIGN.md as designed
-   (not a simpler stand-in); if you must deviate, stop and say why first.
-   Servers bind `0.0.0.0` with the port in one constant/env var.
-   Rules/thresholds/calculations in plain deterministic code with named constants.
-   Core slice order: evaluator (metrics + constraint check, independent of the solver) ->
-   naive baseline -> chosen method -> comparison table on the real input.
-3. RUN: execute C<n>'s scenario exactly (curl -i / Browser preview / real input file).
-   Add or update a small test only when it protects C<n>; its expected value must be
-   hand-derived, not computed by the same code. For a bug: reproduce first, then fix.
-   Core: print `metric | baseline | ours` from code, then the realism bounds from DESIGN.md.
-   If ours does not beat the baseline or a bound is absurd, it is FAIL, not "done".
-4. RECORD: in VERIFICATION.md set PASS/FAIL, evidence (command + key output or path), and one
-   known weakness. In WORKLOG.md one line: what you proposed, what the human accepted /
-   changed / rejected and why. New design choice -> `### D<n>` in DECISIONS.md.
-   After a core slice: Korean explain-back (<=6 lines: input -> steps -> output, why this
-   method over the runner-up, weakest point `file:function`); fix DESIGN.md if the code moved.
-5. COMMIT: `git add -A && git commit -m "feat: <what> (C<n>)"`. Never push.
+2. CHANGE: periphery -> smallest change that can make C<n> pass, no extra features. Core ->
+   the method chosen in DESIGN.md as designed (no simpler stand-in); to deviate, stop first.
+3. RUN: execute C<n>'s scenario exactly (curl -i / Browser preview / real input file). Rerun
+   every earlier PASS criterion whose Plan slice lists a file in `git diff --name-only`.
+   Web: you may start your own server on a spare port for `curl -i`; stop it in CLEAN and add
+   `미리보기 확인: <URL> <what to see>` to the receipt. Bug: reproduce first, then fix.
+   Core: print `metric | baseline | ours` (first core slice, evaluator + naive baseline: the
+   DESIGN.md small-case check + baseline metrics; its row reads `진행(1/3)`, never PASS/FAIL).
+   Ours not beating the baseline, or an absurd realism bound, is FAIL.
+4. CLEAN: stop processes you started (never the human's server tab), delete scratch files;
+   `git status --short` lists only files this slice commits.
+5. RECORD: VERIFICATION row (PASS/FAIL, evidence, one weakness). WORKLOG: one row per stop
+   (a chained batch is one row); every FAIL->fix cycle or human rejection is a 오류 발견 row:
+   what was wrong | how it was caught | fix commit. New design choice -> `### D<n>` citing
+   A<n>/C<n>. Refresh HANDOFF `## 지금 상태`. After a core slice: Korean explain-back (<=6
+   lines: input -> steps -> output, why this method, weakest `file:function`); keep DESIGN.md true.
+6. COMMIT: tick `S<k> [x]` in `## Plan`, then `git add -A && git commit -m "feat: <what> (C<n>)"`.
+   One commit per slice. Never push.
 
-3 failed approaches on C<n> -> stop, revert only your edits, log in WORKLOG, ask one question.
-At the human's handoff checkpoints, refresh HANDOFF.md fully and suggest a fresh session.
-Update HANDOFF line: `Current level: 5 / Next: $level5 (C<next>)` or `$level6`.
+Same failure output twice, or 3 different approaches on one slice -> stop, revert only your
+edits, log it in WORKLOG, ask one precise question.
+Update HANDOFF line: `Current level: 5 / Next: $level5 (<next slice>)` or `$level6`.
 
 ## Next
 Report in Korean, then STOP and wait:
-- 3 lines: C<n> 결과(PASS/FAIL)와 증거 / 왜 이렇게 구현했나 / 어디서 깨질 수 있나.
-  (core slice: add the metric table and the explain-back below the 3 lines)
-- Criteria left and before Freeze: next `$level5` - 다음 기준 C<next>.
-- All PASS, or Freeze reached (regardless of remaining criteria): next `$level6` - 실제 화면 검증 + 독립 리뷰.
-- Time: show current clock, elapsed since Start, and minutes left to Freeze (from HANDOFF.md).
+- Receipts (one line per chained slice), then 3 lines: 결과와 증거 / 왜 이렇게 구현했나 / 어디서
+  깨질 수 있나. Core slice: add the metric table and the explain-back.
+- Next is a core slice: `$level5` - 핵심 슬라이스 <이름>: 무엇을 만들지 한 줄.
+- FAIL, criterion-changing assumption or human step: exactly what the human must do or decide.
+- All PASS, or Freeze reached: `$level6` - 실제 화면 검증 + 독립 리뷰.
+- Time: current clock, elapsed since Start, minutes left to Freeze (from HANDOFF.md).

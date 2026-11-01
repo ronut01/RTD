@@ -52,13 +52,15 @@ more than this step.
    once in an operator action and is stored, users read results), deterministic code vs LLM
    with reason and cost, modules with one-line jobs.
 7. Draft `## Plan` in `docs/TASK.md`, max ~12 lines: vertical slices in dependency order.
-   Slice 1 is a thin end-to-end path (input -> output on the real surface). The core slice
-   order is fixed: evaluator (metrics, written independently of the solver) -> naive baseline
-   -> chosen method -> comparison. Each slice lists files and which C<n> it closes.
+   Slice 1 is a thin end-to-end path (input -> output on the real surface). Each slice line:
+   `S<k> [core|periphery] <what> - <files> - closes C<n>`. Core slices, in this order:
+   evaluator + naive baseline (metrics written independently of the solver) -> chosen method
+   -> comparison on the real input. Anything unsure is `core` (core slices stop for the human).
 8. Review once, read-only, against README + AGREEMENT + Contract + DESIGN:
    contradictions (cite both sides), ambiguous terms, missing constraints; does each scenario
-   name a real command/input; periphery tasks not traced to a criterion -> remove; core
-   method trivial or not beating baseline by design -> fix. Riskiest 1-2 parts get a note.
+   name a real command/input; periphery slices not traced to a criterion -> remove;
+   a core step marked periphery -> fix; core method trivial or not beating baseline by
+   design -> fix. Riskiest 1-2 parts get a note.
 9. Verdict: OKAY (default) / ITERATE (max 3 fixes, apply, re-check once) / REJECT (missing
    file, impossible criterion, or stakeholder decision needed).
 Update HANDOFF line: `Current level: 4 / Next: $level5`. Commit `docs: add design and build plan`.
@@ -66,6 +68,6 @@ Update HANDOFF line: `Current level: 4 / Next: $level5`. Commit `docs: add desig
 ## Next
 Report in Korean, then STOP and wait:
 - 3 lines: 고른 핵심 방법과 기준선 / 판정(OKAY/ITERATE/REJECT)과 바뀐 점 / 가장 위험한 슬라이스.
-- OKAY or ITERATE resolved: next `$level5` - Slice 1부터 하나씩 구현·검증·커밋.
+- OKAY or ITERATE resolved: next `$level5` - Slice 1부터 구현. 주변부는 이어서, 핵심 슬라이스마다 멈춤.
 - REJECT: back to `$level2` (ask the stakeholder the blocking question) or `$level3` (fix contract).
 - Time: show current clock, elapsed since Start, and minutes left to Freeze (from HANDOFF.md).
