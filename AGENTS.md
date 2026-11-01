@@ -66,7 +66,7 @@ READ (only the files involved) -> CHANGE (minimal) -> RUN (the scenario, plus ea
 
 ## 6. Verification = real surface
 Green tests are not proof that it works. Verify on the real surface:
-- Web UI: run the server bound to `0.0.0.0` and check it in the IDE Browser preview
+- Web UI: run the server bound to `0.0.0.0`, port in one constant/env var, and check it in the IDE Browser preview
   (set port/URL, refresh). Report what the human should see.
 - HTTP API: `curl -i` against the running server (status + body).
 - CLI / data tool: run it on the real input files from the task; check the output file.

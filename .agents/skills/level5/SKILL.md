@@ -24,12 +24,12 @@ and set `Next: $level6`. Start every run by printing the remaining slices as a s
    every earlier PASS criterion whose Plan slice lists a file in `git diff --name-only`.
    Web: start your own server on a port other than the human's (e.g. theirs + 1) for `curl -i`;
    stop it in CLEAN. Every web slice's receipt ends with `미리보기 확인: <URL> <what to see>`.
-   Bug: reproduce first, then fix.
+   Bug: reproduce first, then fix. Add a test only when it protects C<n>; its expected value is
+   hand-derived, not computed by the code under test.
    Core: print `metric | baseline | ours` (first core slice, evaluator + naive baseline: the
    DESIGN.md small-case check + baseline metrics; its row reads `진행(1/3)`, never PASS/FAIL).
-   Ours not beating the baseline, or an absurd realism bound, is FAIL.
-   Every objective the stakeholder named gets a metric row; one that only ties the baseline is
-   reported as the top weakness at the stop.
+   Ours not beating the baseline, or an absurd realism bound, is FAIL. Every objective the stakeholder
+   named gets a metric row; one that only ties the baseline is reported as the top weakness at the stop.
 4. CLEAN: stop processes you started (never the human's server tab), delete scratch files;
    `git status --short` lists only files this slice commits.
 5. RECORD: VERIFICATION row (PASS/FAIL, evidence, one weakness). WORKLOG: one row per stop
@@ -37,7 +37,8 @@ and set `Next: $level6`. Start every run by printing the remaining slices as a s
    what was wrong | how it was caught | fix commit. New design choice -> `### D<n>` citing
    A<n>/C<n>. Refresh HANDOFF `## 지금 상태`. After a core slice: Korean explain-back (<=6
    lines: input -> steps -> output, why this method, weakest `file:function`); keep DESIGN.md true.
-6. COMMIT: tick `S<k> [x]` in `## Plan`, then `git add -A && git commit -m "feat: <what> (C<n>)"`.
+6. COMMIT: mark the slice `[x]` in `## Plan` (keep its core/periphery tag), then
+   `git add -A && git commit -m "feat: <what> (C<n>)"`.
    One commit per slice. Never push.
 
 Same failure output twice, or 3 different approaches on one slice -> stop, revert only your
