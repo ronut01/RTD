@@ -18,7 +18,8 @@ description: "Step 7 of 7 (wrap-up + engineering handoff). Use after level6, whe
    Q5 구현한 것과 일부러 구현하지 않은 것, 그 이유
    Q6 결과를 어떻게 믿을 수 있나: 데이터 판단(정제·가정)과 검증 방법(기준선 비교, 현실성 점검)
    Q7 핵심 방법을 고른 이유와 버린 대안 (DESIGN 비교표, D1)
-   Answer each in 2-3 sentences, in this order:
+   Answer each in 2-3 short sentences (plain words, ~60 Korean characters each) the human
+   can say aloud from memory in 5 minutes without AI, in this order:
    ① 구체적 약점 지점 (`file:line`) ② 왜 위험한가 (파급) ③ 다음에 무엇을 확인·개선할지.
    If a likely question rests on a wrong premise about the code, state the actual behavior first.
    Anything not verified is written as not verified.

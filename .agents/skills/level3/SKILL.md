@@ -23,6 +23,8 @@ Write a `## Contract` section in `docs/TASK.md`:
   - Evidence = `curl -i` status line, test name, output path, or what the preview shows; it is
     pasted into the VERIFICATION.md row (no separate evidence files or extra scripts).
   - If a criterion cannot fail, rewrite it.
+- Length: the whole Contract section fits in ~35 lines. Scenario details go in the criterion
+  cell or one line each below the table; no essays. The human must read it in 2 minutes.
 - Constraints: stakeholder words verbatim; your own defaults as `assumed: <x> - <reason>`.
 - Out of scope: explicit list (each with why).
 - Stop condition: "All C1..Cn PASS with evidence in VERIFICATION.md, or the Freeze time in HANDOFF.md is reached."

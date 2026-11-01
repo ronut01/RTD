@@ -41,7 +41,8 @@ more than this step.
      near-empty or over-full units, extreme max times, unserved items). Take them from
      AGREEMENT or mark `assumed:`. These become checks in the core quality criterion.
    - Small-case check: a tiny input where the answer is known by hand or brute force.
-5. Write DESIGN.md sections 1-4 and `### D1` in DECISIONS.md (chosen method, the rejected
+5. Keep DESIGN.md short: sections 1-4 <= ~45 lines, whole file <= ~80 lines; tables over
+   prose, no derivations the human will not read. Write DESIGN.md sections 1-4 and `### D1` in DECISIONS.md (chosen method, the rejected
    candidates and why, what we give up). Then **STOP and ask the human to choose** (Korean,
    <=6 lines): candidates in one line each, your recommendation and the deciding reason.
 

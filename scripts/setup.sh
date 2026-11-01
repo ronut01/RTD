@@ -52,7 +52,11 @@ done
 copy_tree "$HARNESS/docs/templates" "$WS/docs"
 
 # 4. user-level fallback so /skills still finds level1..7 if cwd differs (optional: failure is a warning)
+#    These level1..7 dirs are harness-owned, so refresh them (a stale copy would shadow updates).
 ws_failed=$failed
+for d in "$HARNESS"/.agents/skills/level*; do
+  rm -rf "$HOME/.agents/skills/$(basename "$d")" 2>/dev/null
+done
 copy_tree "$HARNESS/.agents/skills" "$HOME/.agents/skills"
 home_failed=$((failed - ws_failed)); failed=$ws_failed
 

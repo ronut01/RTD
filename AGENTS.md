@@ -106,7 +106,8 @@ and where it breaks. So:
 - If the human has a file open in the editor, tell them which files you changed (save conflicts).
 
 ## 10. Records are reviewed
-Reviewers compare docs against code and commits. Docs must be short and true.
+Reviewers compare docs against code and commits. Docs must be short and true: the human must
+be able to read any one doc in 2 minutes (Contract ~35 lines, DESIGN.md ~80 lines).
 - `docs/TASK.md` facts / assumptions / open questions / not doing / criteria / plan
 - `docs/AGREEMENT.md` what the stakeholder confirmed
 - `docs/DESIGN.md` core problem, method comparison, metrics + baseline, data flow, roles

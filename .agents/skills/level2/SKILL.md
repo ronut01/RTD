@@ -7,6 +7,11 @@ description: "Step 2 of 7 (stakeholder interview + agreement). Use after level1 
 The human types in the messenger; you never contact the stakeholder. Budget 15-20 min total.
 The stakeholder refuses "list all requirements" style asks; small concrete questions work.
 
+Ask the first rung-6 question ("결과가 좋다/나쁘다를 무엇으로 판단하시나요?") in the very first
+batch: it decides the objective, so asking it last wastes the earlier design thinking.
+Never propose a new rule or limit the README/data does not hint at (e.g. a per-group cap):
+a stakeholder may simply approve it and it becomes an invented requirement.
+
 Ladder (go in order, skip rungs README already answers):
 1. Episode - "최근에 이 일 때문에 곤란했던 구체적인 상황 하나를 말해 주실 수 있나요?"
 2. Current workaround - how it is done today, what breaks.
