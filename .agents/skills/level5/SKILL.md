@@ -6,26 +6,29 @@ description: "Step 5 of 7 (build loop by Plan slice). Use after level4 returned 
 
 Unit = one slice of `## Plan` in docs/TASK.md, in order; Slice 1 (thin end-to-end path) first.
 If the first pending slice is `core` (unmarked = core), build only that slice, then stop.
-Otherwise chain `periphery` slices: after COMMIT print `C<n> PASS | <evidence> | <short hash>`
+Otherwise chain `periphery` slices: after COMMIT print `C<n> PASS|진행(k/n) | <evidence> | <short hash>`
 and take the next one. A red run you fix inside the slice does not stop the chain. STOP at:
 the next `core` slice, a FAIL the retry rule ends, any core-quality FAIL, a new `assumed:` or
 `### D<n>` that changes a criterion or the core (other assumptions go in the receipt), a step
 only the human can do (approve, ask the stakeholder), Freeze, or all PASS.
 `$level5 C2 C3` = exactly those slices, then stop.
 Before each slice: `date "+%H:%M"` vs `Freeze:` in HANDOFF.md; at or past Freeze start nothing
-and set `Next: $level6`. Keep a live plan (`update_plan` if available, else a short list in
-chat): one step per remaining slice, `C<n> <path>: <action> - verify by <scenario>`.
+and set `Next: $level6`. Start every run by printing the remaining slices as a short list
+(`S<k> C<n> <path>: <action> - verify by <scenario>`) and keep it current with `update_plan` when that tool exists.
 
 1. READ: only files the slice touches; grep/head for the rest.
 2. CHANGE: periphery -> smallest change that can make C<n> pass, no extra features. Core ->
    the method chosen in DESIGN.md as designed (no simpler stand-in); to deviate, stop first.
 3. RUN: execute C<n>'s scenario exactly (curl -i / Browser preview / real input file). Rerun
    every earlier PASS criterion whose Plan slice lists a file in `git diff --name-only`.
-   Web: you may start your own server on a spare port for `curl -i`; stop it in CLEAN and add
-   `미리보기 확인: <URL> <what to see>` to the receipt. Bug: reproduce first, then fix.
+   Web: start your own server on a port other than the human's (e.g. theirs + 1) for `curl -i`;
+   stop it in CLEAN. Every web slice's receipt ends with `미리보기 확인: <URL> <what to see>`.
+   Bug: reproduce first, then fix.
    Core: print `metric | baseline | ours` (first core slice, evaluator + naive baseline: the
    DESIGN.md small-case check + baseline metrics; its row reads `진행(1/3)`, never PASS/FAIL).
    Ours not beating the baseline, or an absurd realism bound, is FAIL.
+   Every objective the stakeholder named gets a metric row; one that only ties the baseline is
+   reported as the top weakness at the stop.
 4. CLEAN: stop processes you started (never the human's server tab), delete scratch files;
    `git status --short` lists only files this slice commits.
 5. RECORD: VERIFICATION row (PASS/FAIL, evidence, one weakness). WORKLOG: one row per stop

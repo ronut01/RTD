@@ -35,8 +35,9 @@ more than this step.
    Only stdlib unless a package was approved. Exact solvers only if the size is tiny.
 4. **Fix measurement before code:**
    - Metrics: primary objective + 2-3 secondary + hard-constraint violation count.
-   - Baselines: (a) the current process from the data/stakeholder, if any; (b) a naive method
-     (the one a hurried engineer would write first). The chosen method must beat both.
+   - Baselines: (a) the current process from the data/stakeholder - if it is described as a rule
+     (e.g. "nearest ~5 per person"), implement that rule as baseline (a), do not mark it
+     unmeasurable; (b) a naive method (the one a hurried engineer would write first). The chosen method must beat both.
    - Realism bounds: numbers that would look absurd to a practitioner (too many resources,
      near-empty or over-full units, extreme max times, unserved items). Take them from
      AGREEMENT or mark `assumed:`. These become checks in the core quality criterion.
