@@ -106,8 +106,8 @@ and where it breaks. So:
 Reviewers compare docs against code and commits. Docs must be short and true: the human must
 be able to read any one doc in 2 minutes (Contract ~35 lines, DESIGN.md ~80 lines).
 Docs: TASK (facts, assumptions, questions, not doing, Contract, Plan), AGREEMENT (answers `A<n>`),
-  DESIGN (core method, metrics, data flow, roles), DECISIONS (`### D<n>`), VERIFICATION (`| C<n> |`
-  + evidence), WORKLOG (AI proposal -> 채택/수정/거절/오류 발견), HANDOFF (state + Review Q&A).
+  DESIGN (core method, metrics, data flow, roles), DECISIONS (`### D<n>`), 
+  VERIFICATION (`| C<n> |` + evidence), WORKLOG (AI proposal -> 채택/수정/거절/오류 발견), HANDOFF (state + Review Q&A).
 Trace IDs: stakeholder answer A<n> -> criterion C<n> -> decision D<n> -> commit message (C<n>); cite them wherever they apply.
 No `{{...}}` placeholders may remain at handoff: `python3 .agents/scripts/presubmit.py .`
 (exit 0 pass, 1 fail, 2 nothing checked).

@@ -10,7 +10,8 @@ Otherwise chain `periphery` slices: after COMMIT print `C<n> PASS|진행(k/n) | 
 and take the next one. A red run you fix inside the slice does not stop the chain. STOP at:
 the next `core` slice, a FAIL the retry rule ends, any core-quality FAIL, a new `assumed:` or
 `### D<n>` that changes a criterion or the core (other assumptions go in the receipt), a step
-only the human can do (approve, ask the stakeholder), Freeze, or all PASS.
+only the human can do (a decision to approve, asking the stakeholder; a commit approval prompt
+does not end the chain), Freeze, or all PASS.
 `$level5 C2 C3` = exactly those slices, then stop.
 Before each slice: `date "+%H:%M"` vs `Freeze:` in HANDOFF.md; at or past Freeze start nothing
 and set `Next: $level6`. Start every run by printing the remaining slices as a short list
