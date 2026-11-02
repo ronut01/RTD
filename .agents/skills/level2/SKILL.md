@@ -7,8 +7,8 @@ description: "Step 2 of 7 (stakeholder interview + agreement). Use after level1 
 The human types in the messenger; you never contact the stakeholder. Budget 15-20 min total.
 The stakeholder refuses "list all requirements" style asks; small concrete questions work.
 
-Ask the first rung-6 question ("결과가 좋다/나쁘다를 무엇으로 판단하시나요?") in the very first
-batch: it decides the objective, so asking it last wastes the earlier design thinking.
+The very first batch asks "결과가 좋다/나쁘다를 무엇으로 판단하시나요?" and how it is done today
+and what goes wrong (rung 2): they decide the objective and the baseline, so asking late wastes turns.
 Never propose a new rule or limit the README/data does not hint at (e.g. a per-group cap):
 a stakeholder may simply approve it and it becomes an invented requirement.
 
@@ -37,6 +37,7 @@ Each turn:
   ("판정/처리에서 빼야 하는 경우나 예외가 있나요?", "안 해도 되는 건?"), rung 6 at least
   twice (what "good" means + one limit), plus every data anomaly from level1. Do not spend
   more than 2 questions drilling one topic. Each IS row ends confirmed (cite A<n>) or `assumed:`.
+- Two "정해진 게 없다" answers on a topic: stop that topic and record `assumed:`.
 - Stop asking when you can predict the next 3 answers, or after ~20 min.
 
 Then draft the agreement (in AGREEMENT.md): 이해한 문제 / 원인 / 성공 기준 / 핵심 품질

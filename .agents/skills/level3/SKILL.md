@@ -13,7 +13,7 @@ Write a `## Contract` section in `docs/TASK.md`:
   the pass-condition cell, e.g. `(IS2/A2)`); every IS row needs a criterion. One criterion per
   user role walks that role's main task end to end on the real surface with real numbers.
   Your own defaults (e.g. error handling
-  nobody asked for) stay as `assumed:` notes, not criteria. Keep each cell to one short line:
+  nobody asked for) stay as `assumed:` notes, not criteria. Keep each cell to one short line (<= ~80 chars):
   `| C1 | 통과 조건 (binary) | 실행할 명령·조작 | 남길 증거 |`
   - Include happy path, the riskiest edge (bad/missing input, boundary value), and for
     data tasks a hand-computed expected value from a real input row.

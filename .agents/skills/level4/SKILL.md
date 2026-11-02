@@ -47,7 +47,8 @@ Get it right once; rewriting the core later costs more than this step.
      unmeasurable; (b) a naive method (the one a hurried engineer would write first). The chosen method must beat both.
    - Realism bounds: numbers that would look absurd to a practitioner (too many resources,
      near-empty or over-full units, extreme max times, unserved items). Take them from
-     AGREEMENT or mark `assumed:`. These become checks in the core quality criterion.
+     AGREEMENT or mark `assumed:`. These become checks in the core quality criterion. The main
+     complaint about today's process must be a metric the chosen method improves, not a warning.
    - Small-case check: a tiny input where the answer is known by hand or brute force.
 5. Keep DESIGN.md short: sections 1-4 <= ~45 lines, whole file <= ~80 lines; tables over
    prose, no derivations the human will not read. Write DESIGN.md sections 1-4 and `### D1` in DECISIONS.md (chosen method, the rejected
@@ -69,10 +70,11 @@ Get it right once; rewriting the core later costs more than this step.
    session with the review model (PROMPTS §0), paste this prompt verbatim, and STOP until the
    verdict is pasted back:
    ```
-   너는 읽기 전용 계획 리뷰어다. 파일을 수정하지 마. 너는 이 서비스를 매일 쓸 회사 내부 운영 담당자이자 시니어 엔지니어다. README.md, docs/AGREEMENT.md, docs/TASK.md(사용자와 이상 상태, Contract, Plan), docs/DESIGN.md만 읽어. 다음만 본다: ① 이상 상태(IS) 행마다 증명하는 기준과 슬라이스가 있나 ② 핵심 방법이 실무에서 쓰는 방식이고 기준선(현행·단순)을 이길 설계인가, 현실 제약(정원·시간·거리·교대 등)을 빠뜨리지 않았나 ③ 운영자·구성원이 결과 화면을 보고 바로 쓸 수 있나 ④ 남은 시간 안에 끝낼 수 있나(과설계도 지적). 결과는 한국어로: VERDICT: OKAY / ITERATE / REJECT, ISSUES 최대 3개(각각 근거 파일:줄과 고칠 내용), NOTES 최대 3개. 5분 안에 끝내.
+   너는 읽기 전용 계획 리뷰어다. 파일을 수정하지 마. 너는 이 서비스를 매일 쓸 회사 내부 운영 담당자이자 시니어 엔지니어다. README.md, docs/AGREEMENT.md, docs/TASK.md(사용자와 이상 상태, Contract, Plan), docs/DESIGN.md만 끝까지 읽어. 다음만 보고, 판단마다 근거 파일:줄을 붙여: ① 이상 상태(IS) 행마다 증명하는 기준과 슬라이스가 있나 ② 핵심 방법이 실무에서 쓰는 방식이고 기준선(현행·단순)을 이길 설계인가, 현실 제약(정원·시간·거리·교대 등)을 빠뜨리지 않았나 ③ 운영자·구성원이 결과 화면을 보고 바로 쓸 수 있나 ④ 남은 시간 안에 끝낼 수 있나(과설계도 지적). 결과는 한국어로: VERDICT: OKAY / ITERATE / REJECT, ISSUES 최대 3개(각각 근거 파일:줄과 고칠 내용), NOTES 최대 3개. 5분 안에 끝내.
    ```
-9. When the human pastes the verdict: OKAY -> done; ITERATE -> apply the max-3 fixes once,
-   log them in WORKLOG (오류 발견 if the plan was wrong), no second review; REJECT -> stop.
+9. Verdict pasted: OKAY -> done; ITERATE -> apply the max-3 fixes once, but only those that keep
+   every criterion passable with the given data (else note it), log them in WORKLOG (오류 발견
+   if the plan was wrong), no second review; REJECT -> stop.
 Update HANDOFF line: `Current level: 4 / Next: $level5`. Commit `docs: add design and build plan`.
 
 ## Next

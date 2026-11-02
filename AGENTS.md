@@ -65,6 +65,7 @@ READ (only the files involved) -> CHANGE (minimal) -> RUN (the scenario, plus ea
 - Each retry must change something material. Same failure output twice, or 3 failed approaches: stop, revert only your own edits, write what failed in WORKLOG, ask the human one precise question.
 - Commit after each verified unit: `git add -A && git commit -m "<type>: <what> (C<n>)"`.
   `.git/` is sandbox-protected: request approval for the commit in one call; never loosen the sandbox.
+  If the commit still cannot run, print the exact command for the human and say it is not committed.
   English, imperative, meaningful. **Never run `git push`** (work stays local).
 
 ## 6. Verification = real surface
@@ -103,7 +104,7 @@ and where it breaks. So:
 - No package installs unless the task truly needs them and the human approves; prefer stdlib.
 - No outbound transfer of task content. No secrets or tokens in code, logs, or docs.
 - Do not kill processes you did not start. Watch memory (OOM is not compensated).
-- If the human has a file open in the editor, tell them which files you changed (save conflicts).
+- If the human has a file open in the editor, name the files you changed (save conflicts).
 
 ## 10. Records are reviewed
 Reviewers compare docs against code and commits. Docs must be short and true: the human must
