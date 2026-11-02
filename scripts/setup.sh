@@ -48,6 +48,9 @@ for s in recon.py presubmit.py; do
   else failed=$((failed + 1)); echo "  ! FAILED .agents/scripts/$s"; fi
 done
 
+# 2b. role instructions loaded at Codex launch (PROMPTS.md section 0)
+copy_tree "$HARNESS/.agents/models" "$WS/.agents/models"
+
 # 3. Korean doc templates -> docs/*.md (presubmit fails while {{...}} remain)
 copy_tree "$HARNESS/docs/templates" "$WS/docs"
 

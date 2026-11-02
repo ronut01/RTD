@@ -3,7 +3,7 @@
 # RTD — 소형 Codex 하네스
 
 시간 제한이 있는 과제를 Codex CLI 하나로 풀 때 쓰는 **개인용 작업 체계**다.
-AGENTS.md 1개, 단계별 스킬 7개(`$level1`~`$level7`), 한국어 문서 양식 7개, stdlib 점검 스크립트 3개로 되어 있다.
+AGENTS.md 1개, 단계별 스킬 7개(`$level1`~`$level7`), 역할별 모델 지침 3개, 한국어 문서 양식 7개, stdlib 점검 스크립트 3개로 되어 있다.
 
 **특정 과제의 정답이나 과제용 코드는 들어 있지 않다.** 들어 있는 것은 절차(인터뷰 → 목표 계약 → 문제 유형 파악·알고리즘 후보 비교·설계 → 슬라이스별 구현·검증(핵심은 하나씩 멈춤) → 독립 리뷰 → 인수인계)와 기록 양식뿐이다.
 
@@ -15,6 +15,7 @@ AGENTS.md 1개, 단계별 스킬 7개(`$level1`~`$level7`), 한국어 문서 양
 ## 구성
 - `AGENTS.md`: 운영 규칙(영어). routing line, 핵심은 깊게·주변은 얇게, 계약·설계 먼저, 코드 이해 유지, 실제 화면 검증, push 금지.
 - `.agents/skills/level1..7`: 단계별 스킬.
+- `.agents/models/`: 작성(build)·리뷰(review)·조회(lookup) 역할 지침. Codex 시작 때 `-c developer_instructions`로 넣는다(PROMPTS §0).
 - `docs/templates/`: TASK, AGREEMENT, DESIGN(설계 지도), DECISIONS, VERIFICATION, WORKLOG, HANDOFF.
 - `scripts/`: `setup.sh`(멱등, 덮어쓰지 않음), `recon.py`(읽기 전용), `presubmit.py`(exit 0/1/2).
 - `PROMPTS.md`: 단계별 복사용 프롬프트.
