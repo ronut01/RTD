@@ -18,8 +18,8 @@ and set `Next: $level6`. Start every run by printing the remaining slices as a s
 (`S<k> C<n> <path>: <action> - verify by <scenario>`) and keep it current with `update_plan` when that tool exists.
 
 1. READ: only files the slice touches; grep/head for the rest.
-2. CHANGE: periphery -> smallest change that can make C<n> pass, no extra features. Core ->
-   the method chosen in DESIGN.md as designed (no simpler stand-in); to deviate, stop first.
+2. CHANGE: periphery -> smallest change for C<n>, no extra features. Core -> the DESIGN.md method
+   (no simpler stand-in) seeded with the best baseline so it never ends worse; to deviate, stop first.
 3. RUN: execute C<n>'s scenario exactly (curl -i / Browser preview / real input file). Rerun
    every earlier PASS criterion whose Plan slice lists a file in `git diff --name-only`.
    Web: start your own server on a port other than the human's (e.g. theirs + 1) for `curl -i`;

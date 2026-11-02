@@ -14,6 +14,7 @@ codex -m <Terra 5.6> -c "developer_instructions='''$(cat .agents/models/review.m
 codex -m <Luna 6> -c "developer_instructions='''$(cat .agents/models/lookup.md)'''"     # 위치 찾기·요약
 ```
 플래그가 거부되면 일반 `codex`로 시작하고 첫 메시지로 해당 파일 내용을 붙여 넣는다.
+처음 실행하면 '이 폴더를 신뢰할까요' 창이 뜬다 → Trust and continue. 입력창이 나타난 뒤에 입력한다(그 전에 친 글자는 사라진다).
 
 ## 1. 시작 — `$level1`
 ```

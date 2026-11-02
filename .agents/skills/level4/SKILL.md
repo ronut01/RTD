@@ -63,8 +63,8 @@ Get it right once; rewriting the core later costs more than this step.
 7. Draft `## Plan` in `docs/TASK.md`, max ~12 lines: vertical slices in dependency order.
    Slice 1 is a thin end-to-end path (input -> output on the real surface). Each slice line:
    `S<k> [core|periphery] <what> - <files> - closes C<n>`. Core slices, in this order:
-   evaluator + naive baseline (metrics written independently of the solver) -> chosen method
-   -> comparison on the real input. Anything unsure is `core` (core slices stop for the human).
+   evaluator + naive baseline (metrics written independently of the solver) -> chosen method seeded with the best baseline
+   -> comparison on the real input. Unsure = `core` (core slices stop for the human).
 8. Self-check: every IS row has a criterion and a slice; every periphery slice traces to a
    criterion; no core step marked periphery. Commit, then ask the human to open a NEW Codex
    session with the review model (PROMPTS §0), paste this prompt verbatim, and STOP until the
