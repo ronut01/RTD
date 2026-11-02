@@ -33,6 +33,9 @@ Never chain stages on your own. Inside `$level5` only `periphery` slices chain; 
   recognised method for its problem class (chosen in level4), be measured by quality metrics
   against a baseline, and be realistic to a practitioner. A trivial core - a rule that sidesteps
   the real trade-off, or a result no practitioner would run - is a defect even if tests pass.
+- The product is a service the company's own staff will use every day. `docs/TASK.md` names
+  each user role and its ideal state (`IS<n>`); a result that passes the criteria but that role
+  would not use is a defect.
 - Everything else is **periphery**: build only what README + agreed criteria require, smallest
   correct change. No auth, caching, retries, queues, config layers, plugins, or abstractions
   that no criterion asks for. One-use helpers: inline them.
@@ -108,7 +111,7 @@ be able to read any one doc in 2 minutes (Contract ~35 lines, DESIGN.md ~80 line
 Docs: TASK (facts, assumptions, questions, not doing, Contract, Plan), AGREEMENT (answers `A<n>`),
   DESIGN (core method, metrics, data flow, roles), DECISIONS (`### D<n>`), 
   VERIFICATION (`| C<n> |` + evidence), WORKLOG (AI proposal -> 채택/수정/거절/오류 발견), HANDOFF (state + Review Q&A).
-Trace IDs: stakeholder answer A<n> -> criterion C<n> -> decision D<n> -> commit message (C<n>); cite them wherever they apply.
+Trace IDs: stakeholder answer A<n> -> ideal state IS<n> -> criterion C<n> -> decision D<n> -> commit message (C<n>); cite them wherever they apply.
 No `{{...}}` placeholders may remain at handoff: `python3 .agents/scripts/presubmit.py .`
 (exit 0 pass, 1 fail, 2 nothing checked).
 

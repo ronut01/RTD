@@ -1,12 +1,12 @@
 ---
 name: level4
-description: "Step 4 of 7 (approach research + design + one-pass plan check). Use after level3 wrote the contract in docs/TASK.md and before writing feature code: identifies the core problem's class, researches and compares 2-3 recognised methods, fixes quality metrics, baselines and realism bounds in docs/DESIGN.md, waits for the human to choose, then drafts the build plan and checks it once (OKAY / ITERATE max 3 / REJECT)."
+description: "Step 4 of 7 (approach research + design + one-pass plan check). Use after level3 wrote the contract in docs/TASK.md and before writing feature code: identifies the core problem's class, researches and compares 2-3 recognised methods, fixes quality metrics, baselines and realism bounds in docs/DESIGN.md after a short practitioner/method/reference-code research, waits for the human to choose, then drafts the build plan and gets one independent plan review in a new session (OKAY / ITERATE max 3 / REJECT)."
 ---
 # level4 - approach research, design, plan check
 
 Goal: the human approves a core method that a practitioner would accept, and a plan to build
-it, before any feature code. Budget ~15 min. Get it right once; rewriting the core later costs
-more than this step.
+it, before any feature code. Budget ~20 min (research <=8, design ~7, independent review ~5).
+Get it right once; rewriting the core later costs more than this step.
 
 ## Part A - research the core approach (write `docs/DESIGN.md` sections 1-4)
 1. **Formulate** the core from TASK.md + AGREEMENT.md, in plain words then structured:
@@ -27,11 +27,18 @@ more than this step.
    | rule-based judgement, scoring | explicit rule table with priority order -> weighted score + sensitivity check |
    | forecasting | last value / seasonal naive -> moving average, simple regression |
    | matching, dedup | exact key after normalisation -> fuzzy match with threshold |
-   Use your own knowledge first. If web search is available inside this Codex, one quick check
-   of the standard approach is fine; never look for a solution to this specific task.
+   **Research (<=8 min, <=4 web searches; without web search say so and use your knowledge):**
+   (i) how practitioners run this kind of service (what operators really constrain and measure:
+   capacity, max ride/wait time, walking distance, shift times, fairness...); (ii) the standard
+   method for each class; (iii) 1-2 public reference implementations, stdlib-portable,
+   permissive license. One line each in DESIGN.md §2: `출처: <URL> - 가져온 것 / 고친 점`.
+   Adapt and explain what you take; never paste a whole solution or search for this task's answer.
+   A practitioner constraint found here that the stakeholder did not state becomes `assumed:`.
 3. **Compare 2-3 candidates** in DESIGN.md: method / expected quality / complexity at our data
    scale / implementation time in this time box / explainability / main risk. Prefer the
    method that is clearly better than naive, fits the remaining time, and the human can explain.
+   Show two product shapes: the minimum that passes the criteria, and what the in-house users
+   would actually run day to day; name the IS rows each leaves unmet. Default to the second.
    Only stdlib unless a package was approved. Exact solvers only if the size is tiny.
 4. **Fix measurement before code:**
    - Metrics: primary objective + 2-3 secondary + hard-constraint violation count.
@@ -57,13 +64,15 @@ more than this step.
    `S<k> [core|periphery] <what> - <files> - closes C<n>`. Core slices, in this order:
    evaluator + naive baseline (metrics written independently of the solver) -> chosen method
    -> comparison on the real input. Anything unsure is `core` (core slices stop for the human).
-8. Review once, read-only, against README + AGREEMENT + Contract + DESIGN:
-   contradictions (cite both sides), ambiguous terms, missing constraints; does each scenario
-   name a real command/input; periphery slices not traced to a criterion -> remove;
-   a core step marked periphery -> fix; core method trivial or not beating baseline by
-   design -> fix. Riskiest 1-2 parts get a note.
-9. Verdict: OKAY (default) / ITERATE (max 3 fixes, apply, re-check once) / REJECT (missing
-   file, impossible criterion, or stakeholder decision needed).
+8. Self-check: every IS row has a criterion and a slice; every periphery slice traces to a
+   criterion; no core step marked periphery. Commit, then ask the human to open a NEW Codex
+   session with the review model (PROMPTS §0), paste this prompt verbatim, and STOP until the
+   verdict is pasted back:
+   ```
+   너는 읽기 전용 계획 리뷰어다. 파일을 수정하지 마. 너는 이 서비스를 매일 쓸 회사 내부 운영 담당자이자 시니어 엔지니어다. README.md, docs/AGREEMENT.md, docs/TASK.md(사용자와 이상 상태, Contract, Plan), docs/DESIGN.md만 읽어. 다음만 본다: ① 이상 상태(IS) 행마다 증명하는 기준과 슬라이스가 있나 ② 핵심 방법이 실무에서 쓰는 방식이고 기준선(현행·단순)을 이길 설계인가, 현실 제약(정원·시간·거리·교대 등)을 빠뜨리지 않았나 ③ 운영자·구성원이 결과 화면을 보고 바로 쓸 수 있나 ④ 남은 시간 안에 끝낼 수 있나(과설계도 지적). 결과는 한국어로: VERDICT: OKAY / ITERATE / REJECT, ISSUES 최대 3개(각각 근거 파일:줄과 고칠 내용), NOTES 최대 3개. 5분 안에 끝내.
+   ```
+9. When the human pastes the verdict: OKAY -> done; ITERATE -> apply the max-3 fixes once,
+   log them in WORKLOG (오류 발견 if the plan was wrong), no second review; REJECT -> stop.
 Update HANDOFF line: `Current level: 4 / Next: $level5`. Commit `docs: add design and build plan`.
 
 ## Next

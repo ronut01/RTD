@@ -16,7 +16,8 @@ Ladder (go in order, skip rungs README already answers):
 1. Episode - "최근에 이 일 때문에 곤란했던 구체적인 상황 하나를 말해 주실 수 있나요?"
 2. Current workaround - how it is done today, what breaks.
 3. Quantify - how often, how many rows/users/requests, how fast it must be.
-4. Who - who uses the output, who acts on it.
+4. Who - who uses the output, who acts on it; walk one day: "<역할>님은 이걸 언제 열어서 무엇을
+   보고 무엇을 하나요?" (confirms or corrects the IS rows from level1).
 5. Boundaries - exceptions, invalid/missing data, edge values, and what we do NOT need to do.
 6. Quality and realism of the core - what makes the core output good or bad in practice:
    - "결과가 좋다/나쁘다를 무엇으로 판단하시나요?" (cost, time, count of resources, fairness...)
@@ -35,7 +36,7 @@ Each turn:
 - Before stopping, rung 5 must have been asked at least once in plain words
   ("판정/처리에서 빼야 하는 경우나 예외가 있나요?", "안 해도 되는 건?"), rung 6 at least
   twice (what "good" means + one limit), plus every data anomaly from level1. Do not spend
-  more than 2 questions drilling one topic.
+  more than 2 questions drilling one topic. Each IS row ends confirmed (cite A<n>) or `assumed:`.
 - Stop asking when you can predict the next 3 answers, or after ~20 min.
 
 Then draft the agreement (in AGREEMENT.md): 이해한 문제 / 원인 / 성공 기준 / 핵심 품질

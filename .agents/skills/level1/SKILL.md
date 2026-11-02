@@ -20,6 +20,10 @@ Goal: in <=15 min the human knows the environment and what the task really asks.
    AGENTS.md §3). Write it in TASK.md as `핵심 산출물: <what> - 좋고 나쁨을 가르는 것: <guess>`.
    If the data hints at an existing/current process (current plan, past records, costs), note
    it: it is the natural baseline for level4.
+   Treat the task as a service the company's own staff will use every day. In TASK.md
+   `## 사용자와 이상 상태`: one line per user role (when they open it, what they decide from
+   it), then IS1..ISn (<=6): what each role does/sees and what must never look wrong to them
+   (time, capacity, distance, fairness...). Mark each `(추정)` until level2 confirms it.
 5. Fill `docs/TASK.md`:
    - Facts: only what README/data literally says, with the source line.
    - Assumptions: `assumed: <x> - <why>`.

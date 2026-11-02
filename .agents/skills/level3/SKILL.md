@@ -9,8 +9,10 @@ Write a `## Contract` section in `docs/TASK.md`:
 - Outcome: one sentence, user-visible result (not an activity like "implement X").
 - Deliverables: literal paths (code entry point, output files, docs README requires).
 - Criteria table, numbered C1..Cn, ordered by priority from AGREEMENT. LIGHT: 3-5 rows.
-  Each criterion traces to a README line or an AGREEMENT row `A<n>` (write it in the
-  pass-condition cell, e.g. `(A2)`); your own defaults (e.g. error handling
+  Each criterion proves an IS row and traces to a README line or AGREEMENT row (write both in
+  the pass-condition cell, e.g. `(IS2/A2)`); every IS row needs a criterion. One criterion per
+  user role walks that role's main task end to end on the real surface with real numbers.
+  Your own defaults (e.g. error handling
   nobody asked for) stay as `assumed:` notes, not criteria. Keep each cell to one short line:
   `| C1 | 통과 조건 (binary) | 실행할 명령·조작 | 남길 증거 |`
   - Include happy path, the riskiest edge (bad/missing input, boundary value), and for
