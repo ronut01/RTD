@@ -15,7 +15,8 @@ Write a `## Contract` section in `docs/TASK.md`:
   Your own defaults (e.g. error handling
   nobody asked for) stay as `assumed:` notes, not criteria. Keep each cell to one short line (<= ~80 chars):
   `| C1 | 통과 조건 (binary) | 실행할 명령·조작 | 남길 증거 |`
-  - Include happy path, the riskiest edge (bad/missing input, boundary value), and for
+  - Include happy path, the riskiest edge (bad/missing input, boundary value, the core action
+    failing -> user sees a message and the previous result stays), and for
     data tasks a hand-computed expected value from a real input row.
   - Include at least one **core quality criterion**: on the real input, every H in `조건 장부` has 0
     violations (counted per H) AND the primary metric beats the baseline (current process or naive method)
