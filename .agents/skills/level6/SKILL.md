@@ -4,7 +4,8 @@ description: "Step 6 of 7 (verification + independent review). Use after level5 
 ---
 # level6 - real-surface verification and one independent review
 
-1. Fresh run, no reuse of old output: for each C<n>, run its scenario now on the real surface
+1. Fresh run, no reuse of old output (a role page empty or "no plan" on a fresh server = FAIL,
+   never a doc note): for each C<n>, run its scenario now on the real surface
    (Browser preview at 0.0.0.0:<port>, `curl -i`, or the real input file). Update evidence.
    Build success or green tests alone do not count. PASS only if the criterion's own command
    ran as written; if it does not exist or you used a different check, mark FAIL or NOT RUN and

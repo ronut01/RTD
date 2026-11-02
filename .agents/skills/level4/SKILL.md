@@ -39,7 +39,7 @@ Get it right once; rewriting the core later costs more than this step.
    method that is clearly better than naive, fits the remaining time, and the human can explain.
    Show two product shapes: the minimum that passes the criteria, and what the in-house users
    would actually run day to day; name the IS rows each leaves unmet. Default to the second.
-   One candidate uses a proven solver package (e.g. ortools): `pip install` into ./.venv once; fail -> stdlib (D1).
+   During research, `pip install` a proven solver (e.g. ortools) into ./.venv once, whatever you pick; log it in D1.
 4. **Fix measurement before code:**
    - Metrics: primary objective + 2-3 secondary + violations counted per H-id of `조건 장부`.
    - Baselines: (a) the current process from the data/stakeholder - if it is described as a rule

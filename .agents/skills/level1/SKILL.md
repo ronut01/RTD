@@ -13,7 +13,8 @@ Goal: in <=15 min the human knows the environment and what the task really asks.
    port availability, and the timestamp-parsing line (Python 3.9 rejects `Z` in fromisoformat).
 3. Read the task `README.md` fully (it is short). Data files: `wc -l` first. Up to ~200 lines:
    read fully. Larger: profile with a short stdlib script (per column: distinct values, blanks,
-   formats) instead of reading. List anomalies you see (blank/odd values, case variants, mixed
+   formats) instead of reading. Normalise key case/whitespace before checking uniqueness, and join key columns
+   across files (orphans both ways). List anomalies you see (blank/odd values, case variants, mixed
    formats, duplicate-looking rows) - each becomes an open question.
 4. Classify the task: (a) web service / API, (b) data + rules -> judgement/report, (c) other.
    Then name the **core**: the one output a domain expert would judge as good or bad (see

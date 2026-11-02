@@ -20,7 +20,8 @@ Write a `## Contract` section in `docs/TASK.md`:
     data tasks a hand-computed expected value from a real input row.
   - Include at least one **core quality criterion**: on the real input, every H in `조건 장부` has 0
     violations (counted per H) AND the primary metric beats the baseline (current process or naive method)
-    AND realism bounds hold, e.g. `제약 위반 0건, <지표> <= 기준선, <자원> 이용률 >= X%`.
+    AND realism bounds hold (on the chosen output only; baselines are measured, never gated;
+    keep it to <= 4 conditions), e.g. `제약 위반 0건, <지표> <= 기준선, <자원> 이용률 >= X%`.
     Numbers come from the stakeholder; if missing, set them as `assumed:` and say so. The exact
     baseline value may be filled in level4, but the comparison must be fixed now.
   - Scenario = exact command or UI steps with concrete inputs. "잘 동작하는지 확인" is invalid.
