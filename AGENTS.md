@@ -71,7 +71,7 @@ READ (only the files involved) -> CHANGE (minimal) -> RUN (the scenario, plus ea
 ## 6. Verification = real surface
 Green tests are not proof that it works. Verify on the real surface:
 - Web UI: run the server bound to `0.0.0.0`, port in one constant/env var, and check it in the IDE Browser preview
-  (set port/URL, refresh). Report what the human should see.
+  (set port/URL, refresh). Open each user role's main page on a fresh start, with no earlier action.
 - HTTP API: `curl -i` against the running server (status + body).
 - CLI / data tool: run it on the real input files from the task; check the output file.
 - Core output: print its quality metrics on the real input next to the baseline, then a

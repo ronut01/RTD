@@ -46,7 +46,7 @@ Get it right once; rewriting the core later costs more than this step.
      (e.g. "nearest ~5 per person"), implement that rule as baseline (a), do not mark it
      unmeasurable; (b) a naive method (the one a hurried engineer would write first). The chosen method must beat both.
    - Realism bounds: numbers that would look absurd to a practitioner (too many resources,
-     near-empty or over-full units, extreme max times, unserved items). Take them from
+     near-empty or over-full units, extreme max times, unserved items, solver runtime > ~30 s). Take them from
      AGREEMENT or mark `assumed:`. These become checks in the core quality criterion. The main
      complaint about today's process must be a metric the chosen method improves, not a warning.
    - Small-case check: a tiny input where the answer is known by hand or brute force.
