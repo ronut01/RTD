@@ -26,6 +26,10 @@ Goal: in <=15 min the human knows the environment and what the task really asks.
    (time, capacity, distance, fairness...). Mark each `(추정)` until level2 confirms it.
 5. Fill `docs/TASK.md`:
    - Facts: only what README/data literally says, with the source line.
+   - `## 조건 장부`: every rule in README/data, one line each with its source line: `H<n>` must
+     never break, `S<n>` prefer. Hunt for time offsets (arrive N min before, leave N min after),
+     allowed-choice lists (only listed stops/slots), who is active on which date (work vs off
+     days), capacities and max limits. A missed rule makes the whole output wrong.
    - Assumptions: `assumed: <x> - <why>`.
    - Open questions: ranked by impact (scope > correctness > edge cases > UX), max 7.
      These feed the stakeholder interview in level2.

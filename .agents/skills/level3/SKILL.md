@@ -17,8 +17,8 @@ Write a `## Contract` section in `docs/TASK.md`:
   `| C1 | 통과 조건 (binary) | 실행할 명령·조작 | 남길 증거 |`
   - Include happy path, the riskiest edge (bad/missing input, boundary value), and for
     data tasks a hand-computed expected value from a real input row.
-  - Include at least one **core quality criterion**: on the real input, hard constraints have 0
-    violations AND the primary metric beats the baseline (current process or naive method)
+  - Include at least one **core quality criterion**: on the real input, every H in `조건 장부` has 0
+    violations (counted per H) AND the primary metric beats the baseline (current process or naive method)
     AND realism bounds hold, e.g. `제약 위반 0건, <지표> <= 기준선, <자원> 이용률 >= X%`.
     Numbers come from the stakeholder; if missing, set them as `assumed:` and say so. The exact
     baseline value may be filled in level4, but the comparison must be fixed now.

@@ -101,7 +101,7 @@ and where it breaks. So:
 ## 9. Environment safety
 - Do not touch `~/.codex/`, global config, IDE-managed settings, MCP connections,
   or any managed/connection process. Do not update Codex even if prompted.
-- No package installs unless the task truly needs them and the human approves; prefer stdlib.
+- Packages: one `pip install` try for a proven solver is fine (log it); if it fails, stdlib only.
 - No outbound transfer of task content. No secrets or tokens in code, logs, or docs.
 - Do not kill processes you did not start. Watch memory (OOM is not compensated).
 - If the human has a file open in the editor, name the files you changed (save conflicts).

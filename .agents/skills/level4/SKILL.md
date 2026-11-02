@@ -39,9 +39,9 @@ Get it right once; rewriting the core later costs more than this step.
    method that is clearly better than naive, fits the remaining time, and the human can explain.
    Show two product shapes: the minimum that passes the criteria, and what the in-house users
    would actually run day to day; name the IS rows each leaves unmet. Default to the second.
-   Only stdlib unless a package was approved. Exact solvers only if the size is tiny.
+   A proven solver package (e.g. ortools): try `pip install` once; if it fails, stdlib. Log it in D1.
 4. **Fix measurement before code:**
-   - Metrics: primary objective + 2-3 secondary + hard-constraint violation count.
+   - Metrics: primary objective + 2-3 secondary + violations counted per H-id of `조건 장부`.
    - Baselines: (a) the current process from the data/stakeholder - if it is described as a rule
      (e.g. "nearest ~5 per person"), implement that rule as baseline (a), do not mark it
      unmeasurable; (b) a naive method (the one a hurried engineer would write first). The chosen method must beat both.
@@ -70,7 +70,7 @@ Get it right once; rewriting the core later costs more than this step.
    session with the review model (PROMPTS §0), paste this prompt verbatim, and STOP until the
    verdict is pasted back:
    ```
-   너는 읽기 전용 계획 리뷰어다. 파일을 수정하지 마. 너는 이 서비스를 매일 쓸 회사 내부 운영 담당자이자 시니어 엔지니어다. README.md, docs/AGREEMENT.md, docs/TASK.md(사용자와 이상 상태, Contract, Plan), docs/DESIGN.md만 끝까지 읽어. 다음만 보고, 판단마다 근거 파일:줄을 붙여: ① 이상 상태(IS) 행마다 증명하는 기준과 슬라이스가 있나 ② 핵심 방법이 실무에서 쓰는 방식이고 기준선(현행·단순)을 이길 설계인가, 현실 제약(정원·시간·거리·교대 등)을 빠뜨리지 않았나 ③ 운영자·구성원이 결과 화면을 보고 바로 쓸 수 있나 ④ 남은 시간 안에 끝낼 수 있나(과설계도 지적). 결과는 한국어로: VERDICT: OKAY / ITERATE / REJECT, ISSUES 최대 3개(각각 근거 파일:줄과 고칠 내용), NOTES 최대 3개. 5분 안에 끝내.
+   너는 읽기 전용 계획 리뷰어다. 파일을 수정하지 마. 너는 이 서비스를 매일 쓸 회사 내부 운영 담당자이자 시니어 엔지니어다. README.md, docs/AGREEMENT.md, docs/TASK.md(사용자와 이상 상태, Contract, Plan), docs/DESIGN.md만 끝까지 읽어. 다음만 보고, 판단마다 근거 파일:줄을 붙여: ① 이상 상태(IS) 행마다 증명하는 기준과 슬라이스가 있나 ② 핵심 방법이 실무에서 쓰는 방식이고 기준선(현행·단순)을 이길 설계인가, README의 규칙이 모두 조건 장부 H/S에 있고 평가기가 H마다 위반을 세나, 현실 제약(정원·시간·거리·교대 등)을 빠뜨리지 않았나 ③ 운영자·구성원이 결과 화면을 보고 바로 쓸 수 있나 ④ 남은 시간 안에 끝낼 수 있나(과설계도 지적). 결과는 한국어로: VERDICT: OKAY / ITERATE / REJECT, ISSUES 최대 3개(각각 근거 파일:줄과 고칠 내용), NOTES 최대 3개. 5분 안에 끝내.
    ```
 9. Verdict pasted: OKAY -> done; ITERATE -> apply the max-3 fixes once, but only those that keep
    every criterion passable with the given data (else note it), log them in WORKLOG (오류 발견
