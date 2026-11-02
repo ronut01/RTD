@@ -70,8 +70,8 @@ READ (only the files involved) -> CHANGE (minimal) -> RUN (the scenario, plus ea
 
 ## 6. Verification = real surface
 Green tests are not proof that it works. Verify on the real surface:
-- Web UI: run the server bound to `0.0.0.0`, port in one constant/env var, and check it in the IDE Browser preview
-  (set port/URL, refresh). Open each user role's main page on a fresh start, with no earlier action.
+- Web UI: start it with the exact run command from the docs, bound to `0.0.0.0`, port in one constant/env var; check the
+  IDE Browser preview. On a fresh start each role's main page shows real data (saved result), never an empty state.
 - HTTP API: `curl -i` against the running server (status + body).
 - CLI / data tool: run it on the real input files from the task; check the output file.
 - Core output: print its quality metrics on the real input next to the baseline, then a
@@ -101,7 +101,7 @@ and where it breaks. So:
 ## 9. Environment safety
 - Do not touch `~/.codex/`, global config, IDE-managed settings, MCP connections,
   or any managed/connection process. Do not update Codex even if prompted.
-- Packages: one `pip install` try for a proven solver is fine (log it); if it fails, stdlib only.
+- Packages: one `pip install` try for a proven solver into `./.venv` in the workspace (log it, use it in the run command); if it fails, stdlib only.
 - No outbound transfer of task content. No secrets or tokens in code, logs, or docs.
 - Do not kill processes you did not start. Watch memory (OOM is not compensated).
 - If the human has a file open in the editor, name the files you changed (save conflicts).

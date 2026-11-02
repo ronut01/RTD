@@ -39,7 +39,7 @@ Get it right once; rewriting the core later costs more than this step.
    method that is clearly better than naive, fits the remaining time, and the human can explain.
    Show two product shapes: the minimum that passes the criteria, and what the in-house users
    would actually run day to day; name the IS rows each leaves unmet. Default to the second.
-   A proven solver package (e.g. ortools): try `pip install` once; if it fails, stdlib. Log it in D1.
+   One candidate uses a proven solver package (e.g. ortools): `pip install` into ./.venv once; fail -> stdlib (D1).
 4. **Fix measurement before code:**
    - Metrics: primary objective + 2-3 secondary + violations counted per H-id of `조건 장부`.
    - Baselines: (a) the current process from the data/stakeholder - if it is described as a rule
@@ -58,7 +58,7 @@ Get it right once; rewriting the core later costs more than this step.
 ## Part B - after the human chooses: design map + plan + one check
 6. Fill DESIGN.md section 5-7: data flow (input -> validation -> state -> output, who owns
    each state), roles if more than one user type (what each sees/does; heavy computation runs
-   once in an operator action and is stored, users read results), deterministic code vs LLM
+   once and is saved; a fresh start loads the saved result, never an empty page), deterministic code vs LLM
    with reason and cost, modules with one-line jobs.
 7. Draft `## Plan` in `docs/TASK.md`, max ~12 lines: vertical slices in dependency order.
    Slice 1 is a thin end-to-end path (input -> output on the real surface). Each slice line:
