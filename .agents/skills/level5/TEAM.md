@@ -34,7 +34,8 @@ STOP WHEN: the scenario passes, or the same failure twice (report it, change not
 ## 4. Check, then record
 - A worker's report is a claim, not evidence. Re-run each C<n> scenario yourself, or spawn one
   read-only verifier ("run these scenarios exactly, report output; edit nothing") for long checks.
-  Web: open each role's main page on a fresh start too.
+  Web: open each role's main page on a fresh start too. Any user-facing message or list: quote 3 real
+  samples per role in the receipt; generic, misleading or over-long text is a FAIL.
 - FAIL -> re-brief the same worker once with the failing output; a second FAIL ends the slice by
   the retry rule (stop, ask the human one precise question).
 - `git status --short` shows only owned files changed -> RECORD and COMMIT one commit per slice.
@@ -43,5 +44,6 @@ STOP WHEN: the scenario passes, or the same failure twice (report it, change not
 ## 5. level6 fix loop (no `$level5` needed from the human)
 After the fresh run and the review verdict, the lead fixes every FAIL and cited issue the same way:
 one worker per criterion (disjoint files), check, commit, then re-run step 1 of level6 for the
-touched criteria. At most 2 rounds. A fix that would change a criterion, add a feature or pass
+touched criteria. At most 2 rounds. Then ask the human to paste the original ISSUES and your fixes back
+  into the same reviewer session and record its verdict; your own OKAY does not close a review issue. A fix that would change a criterion, add a feature or pass
 Freeze stops for the human.

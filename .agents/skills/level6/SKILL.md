@@ -17,7 +17,8 @@ description: "Step 6 of 7 (verification + independent review). Use after level5 
    README/AGREEMENT requirement with no criterion, and any code with no requirement (scope creep).
 3. Quick risk pass on the diff (`git diff --stat` then targeted reads): input validation at
    entry points, secrets, error paths, time zones, empty/huge input. Note, do not gold-plate.
-4. Independent review, once: ask the human to open a NEW Codex session (or `/model` -> the
+4. Independent review, once: ask the human to start the service on their port first (the reviewer
+   cannot start one) and to open a NEW Codex session (or `/model` -> the
    cross-review model) and print the prompt below verbatim in a code block for them to copy,
    replacing `<FIRST_COMMIT>` with `git rev-list --max-parents=0 HEAD` (short hash). The reviewer
    is read-only and returns OKAY or ITERATE with max 3 issues, each citing a failing criterion.

@@ -26,6 +26,7 @@ Ladder (go in order, skip rungs README already answers):
    - the current process in numbers and its main complaint (this becomes the baseline).
    - rules for a subgroup, time window or place: "특정 그룹·시간대·장소에만 따로 적용되는 규칙이 있나요?"
    - trade-off: "<A>와 <B>가 부딪히면 무엇이 우선인가요?"
+   - when a rule or preference cannot be met: "지킬 수 없을 때 대체·표시·거절 중 무엇을 하나요? 대체해도 되는 것과 안 되는 것은?"
 7. Priority - if only one thing works at the end, which one.
 
 Each turn:

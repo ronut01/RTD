@@ -7,7 +7,9 @@ description: "Step 3 of 7 (goal contract). Use after level2 when docs/AGREEMENT.
 Write a `## Contract` section in `docs/TASK.md`:
 
 - Outcome: one sentence, user-visible result (not an activity like "implement X").
-- Deliverables: literal paths (code entry point, output files, docs README requires).
+- Deliverables: literal paths (code entry point, output files, docs README requires), each output file
+  written by one documented command (a running service never rewrites it). Format questions the
+  stakeholder left open: follow README literally; extra information goes in a separate field or file.
 - Criteria table, numbered C1..Cn, ordered by priority from AGREEMENT. LIGHT: 3-5 rows.
   Each criterion proves an IS row and traces to a README line or AGREEMENT row (write both in
   the pass-condition cell, e.g. `(IS2/A2)`); every IS row needs a criterion. One criterion per

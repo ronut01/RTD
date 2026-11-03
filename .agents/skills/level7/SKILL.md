@@ -8,7 +8,8 @@ description: "Step 7 of 7 (wrap-up + engineering handoff). Use after level6, whe
    DESIGN.md, DECISIONS.md, VERIFICATION.md, WORKLOG.md. Do not invent anything not in code or docs.
 2. Finalize docs (short, true): DESIGN.md matches the code (data flow, modules, LLM vs code),
    VERIFICATION known weaknesses, DECISIONS "포기한 것", WORKLOG accepted/modified/rejected/오류 발견,
-   HANDOFF full state (`Current level: 7 / Next: handoff`).
+   HANDOFF full state (`Current level: 7 / Next: handoff`). Re-run each deliverable's documented command and
+   check the file; `git status --short` must stay clean afterwards.
 3. Fill `## Review Q&A` in `docs/HANDOFF.md` (Korean), one question per area below, made
    specific to this code (keep the template's areas, replace the generic wording):
    Q1 AI 협업: AI가 제안한 것 중 받아들인 것 / 고친 것 / 거절한 것과 이유 (WORKLOG 근거) - 오류 발견 행이 있으면 하나는 반드시 포함
