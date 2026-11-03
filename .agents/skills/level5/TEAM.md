@@ -16,7 +16,8 @@ commits, and decides stops. Workers only change code in the files they own.
 ```
 TASK: S<k> <what> - closes C<n>: <pass condition verbatim from TASK.md>
 OWN FILES: <only these may change>   READ: TASK.md 조건 장부, DESIGN.md §<x>, AGREEMENT A<n>
-METHOD: <core: the DESIGN.md method, seeded from the best baseline | periphery: smallest change>
+METHOD: <core: the DESIGN.md method, seeded from the best baseline | periphery: smallest change>;
+        build on the DESIGN.md §2 출처 it names (adapt, add what our case needs) instead of reinventing
 RUN: <exact scenario command>; own server on port <8100+k>, stop it before you finish
 DO NOT: commit, edit docs/ or other files, install packages, start the human's server, ask the human
 DELIVER: files changed, scenario command + last output lines, `metric | baseline | ours` for core,

@@ -27,13 +27,13 @@ Get it right once; rewriting the core later costs more than this step.
    | rule-based judgement, scoring | explicit rule table with priority order -> weighted score + sensitivity check |
    | forecasting | last value / seasonal naive -> moving average, simple regression |
    | matching, dedup | exact key after normalisation -> fuzzy match with threshold |
+   | booking, reservations, stock under concurrent requests | check-then-insert -> overlap check in one transaction + DB constraint (SQLite `BEGIN IMMEDIATE`), idempotency key |
    **Research (<=8 min, <=4 web searches; without web search say so and use your knowledge):**
    (i) how practitioners run this kind of service (what operators really constrain and measure:
    capacity, max ride/wait time, walking distance, shift times, fairness...); (ii) the standard
-   method for each class; (iii) 1-2 public reference implementations, stdlib-portable,
-   permissive license. One line each in DESIGN.md §2: `출처: <URL> - 가져온 것 / 고친 점`.
-   Adapt and explain what you take; never paste a whole solution or search for this task's answer.
-   A practitioner constraint found here that the stakeholder did not state becomes `assumed:`.
+   method for each class; (iii) 1-2 public reference implementations (permissive license) and the standard pattern for
+   the riskiest engineering part (concurrent writes, recurrence, time zones). Reuse what fits: adapt it, add what our case needs,
+   cite it in DESIGN.md §2 `출처: <URL> - 가져온 것 / 고친 점`; never paste a whole solution or search for this task's answer. Unstated practitioner constraints -> `assumed:`.
 3. **Compare 2-3 candidates** in DESIGN.md: method / expected quality / complexity at our data
    scale / implementation time in this time box / explainability / main risk. Prefer the
    method that is clearly better than naive, fits the remaining time, and the human can explain.
