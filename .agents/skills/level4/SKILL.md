@@ -12,27 +12,17 @@ Get it right once; rewriting the core later costs more than this step.
 1. **Formulate** the core from TASK.md + AGREEMENT.md, in plain words then structured:
    decision (what we choose), objective (what we minimise/maximise, in priority order),
    hard constraints (must never break), soft constraints (prefer), data scale (rows, items).
-   Real tasks often chain several sub-problems (e.g. choose sites -> assign people -> order
-   visits); split them and formulate each.
-2. **Name the problem class** of each sub-problem with its standard name, so the method comes
-   from known work, not invention. Common classes (not exhaustive):
-   | class | typical methods (baseline -> better) |
-   |---|---|
-   | vehicle/visit routing, sequencing | nearest neighbour -> savings / sweep / insertion + 2-opt, or-opt; cluster-first route-second |
-   | site/location selection, coverage | greedy add/drop -> p-median / set cover / k-medoids + swap |
-   | assignment with capacities | greedy -> Hungarian / min-cost flow / greedy + swap |
-   | scheduling, timetabling, shifts | first-fit / list scheduling -> constraint search with backtracking, local search |
-   | packing, selection under budget | first-fit decreasing / ratio greedy -> knapsack DP, local search |
-   | grouping, segmentation | fixed rules -> k-means / k-medoids / DBSCAN |
-   | rule-based judgement, scoring | explicit rule table with priority order -> weighted score + sensitivity check |
-   | forecasting | last value / seasonal naive -> moving average, simple regression |
-   | matching, dedup | exact key after normalisation -> fuzzy match with threshold |
-   | booking, reservations, stock under concurrent requests | check-then-insert -> overlap check in one transaction + DB constraint (SQLite `BEGIN IMMEDIATE`), idempotency key |
+   Real tasks often chain several sub-problems; split them and formulate each. Treat the risky
+   engineering parts (consistency under concurrent use, time handling, imports...) as sub-problems too.
+2. **Find what each sub-problem is an instance of**, so the method comes from known work, not
+   invention: describe it in plain words, then search for the names practitioners and the literature
+   use for it (`<plain description> algorithm`, `... best practice`, `... open source`). For each, name
+   a naive baseline and 1-2 recognised better methods with a reason they fit our data and time box.
+   Nothing recognised fits -> say so, design from first principles, and still measure against the baseline.
    **Research (<=8 min, <=4 web searches; without web search say so and use your knowledge):**
-   (i) how practitioners run this kind of service (what operators really constrain and measure:
-   capacity, max ride/wait time, walking distance, shift times, fairness...); (ii) the standard
-   method for each class; (iii) 1-2 public reference implementations (permissive license) and the standard pattern for
-   the riskiest engineering part (concurrent writes, recurrence, time zones). Reuse what fits: adapt it, add what our case needs,
+   (i) how practitioners run this kind of service (the limits operators enforce, what they measure,
+   what users complain about); (ii) the recognised method for each sub-problem; (iii) 1-2 public
+   reference implementations or patterns (permissive license) for the core and the riskiest engineering part. Reuse what fits: adapt it, add what our case needs,
    cite it in DESIGN.md §2 `출처: <URL> - 가져온 것 / 고친 점`; never paste a whole solution or search for this task's answer. Unstated practitioner constraints -> `assumed:`.
 3. **Compare 2-3 candidates** in DESIGN.md: method / expected quality / complexity at our data
    scale / implementation time in this time box / explainability / main risk. Prefer the
@@ -70,7 +60,7 @@ Get it right once; rewriting the core later costs more than this step.
    session with the review model (PROMPTS §0), paste this prompt verbatim, and STOP until the
    verdict is pasted back:
    ```
-   너는 읽기 전용 계획 리뷰어다. 파일을 수정하지 마. 너는 이 서비스를 매일 쓸 회사 내부 운영 담당자이자 시니어 엔지니어다. README.md, docs/AGREEMENT.md, docs/TASK.md(사용자와 이상 상태, Contract, Plan), docs/DESIGN.md만 끝까지 읽어. 다음만 보고, 판단마다 근거 파일:줄을 붙여: ① 이상 상태(IS) 행마다 증명하는 기준과 슬라이스가 있나 ② 핵심 방법이 실무에서 쓰는 방식이고 기준선(현행·단순)을 이길 설계인가, README의 규칙이 모두 조건 장부 H/S에 있고 평가기가 H마다 위반을 세나, 현실 제약(정원·시간·거리·교대 등)을 빠뜨리지 않았나 ③ 운영자·구성원이 결과 화면을 보고 바로 쓸 수 있나 ④ 남은 시간 안에 끝낼 수 있나(과설계도 지적). 결과는 한국어로: VERDICT: OKAY / ITERATE / REJECT, ISSUES 최대 3개(각각 근거 파일:줄과 고칠 내용), NOTES 최대 3개. 5분 안에 끝내.
+   너는 읽기 전용 계획 리뷰어다. 파일을 수정하지 마. 너는 이 서비스를 매일 쓸 회사 내부 운영 담당자이자 시니어 엔지니어다. README.md, docs/AGREEMENT.md, docs/TASK.md(사용자와 이상 상태, Contract, Plan), docs/DESIGN.md만 끝까지 읽어. 다음만 보고, 판단마다 근거 파일:줄을 붙여: ① 이상 상태(IS) 행마다 증명하는 기준과 슬라이스가 있나 ② 핵심 방법이 실무에서 쓰는 방식이고 기준선(현행·단순)을 이길 설계인가, README의 규칙이 모두 조건 장부 H/S에 있고 평가기가 H마다 위반을 세나, 실무자가 지키는 현실 제약을 빠뜨리지 않았나 ③ 운영자·구성원이 결과 화면을 보고 바로 쓸 수 있나 ④ 남은 시간 안에 끝낼 수 있나(과설계도 지적). 결과는 한국어로: VERDICT: OKAY / ITERATE / REJECT, ISSUES 최대 3개(각각 근거 파일:줄과 고칠 내용), NOTES 최대 3개. 5분 안에 끝내.
    ```
 9. Verdict pasted: OKAY -> done; ITERATE -> apply the max-3 fixes once, but only those that keep
    every criterion passable with the given data (else note it), log them in WORKLOG (오류 발견

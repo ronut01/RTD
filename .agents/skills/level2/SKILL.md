@@ -24,7 +24,7 @@ Ladder (go in order, skip rungs README already answers):
    - physical/business limits: capacity, maximum time or distance, working hours, budget.
    - resources with no stated limit: "<자원>(대수·인원·근무시간)은 적을수록 좋은가요, 최소보다 더 써도 되나요, 상한이 있나요?"
    - the current process in numbers and its main complaint (this becomes the baseline).
-   - rules for a subgroup or time (night shift, new hires, special sites): "야간·신입 등 따로 적용되는 규칙이 있나요?"
+   - rules for a subgroup, time window or place: "특정 그룹·시간대·장소에만 따로 적용되는 규칙이 있나요?"
    - trade-off: "<A>와 <B>가 부딪히면 무엇이 우선인가요?"
 7. Priority - if only one thing works at the end, which one.
 
