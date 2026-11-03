@@ -25,14 +25,14 @@ description: "Step 6 of 7 (verification + independent review). Use after level5 
    ```
    너는 읽기 전용 리뷰어다. 파일을 수정하지 마. AGENTS.md, docs/TASK.md의 Contract, docs/VERIFICATION.md, `git diff <FIRST_COMMIT>..HEAD --stat`과 필요한 부분만 읽어. 주장은 직접 재현한 뒤에만 믿어. 결과는 한국어로: VERDICT: OKAY 또는 ITERATE / ISSUES 최대 3개(각각 실패하는 기준 C번호와 증거 파일:줄 또는 명령 출력) / NOTES 최대 3개. 기준이 요구하지 않는 코드와 실패할 수 없는 테스트도 지적해. docs/DESIGN.md의 핵심 산출물이 기준선보다 실제로 나은지, 현업 담당자가 보기에 말이 되는 결과인지(자원 수, 이용률, 극단값)도 실제 실행 결과로 판단해. docs/TASK.md의 '사용자와 이상 상태'를 읽고 역할별 주 업무를 실제 화면·명령으로 따라가 보며 각 IS가 성립하는지도 판단해.
    ```
-5. Fix only cited issues with `$level5 C<n> ...` (list form: those criteria only, no chaining);
-   record review result in WORKLOG.md.
+5. Fix every FAIL and cited issue yourself as lead (`.agents/skills/level5/TEAM.md` §5: workers,
+   check, commit, re-run those criteria; max 2 rounds); record the review result in WORKLOG.md.
 Update HANDOFF line: `Current level: 6 / Next: $level7` (or `$level5` if FAIL).
 Commit `test: verify all criteria on real surface`.
 
 ## Next
 Report in Korean, then STOP and wait:
 - 3 lines: PASS/FAIL 개수 / 리뷰 판정 / 남은 약점.
-- Any FAIL and still before Freeze: back to `$level5 C<n>` for that criterion.
+- FAIL left after the fix loop: what it is and what the human must decide (or `$level5 C<n>`).
 - Otherwise next `$level7` - 문서 마무리 + HANDOFF.md Review Q&A.
 - Time: show current clock, elapsed since Start, and minutes left to Freeze (from HANDOFF.md).

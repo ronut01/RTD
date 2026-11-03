@@ -14,6 +14,7 @@ That stop condition binds you. When it holds, stop. Extra polish after it is a d
 - Action ask (including "can you...") -> do it at exactly the asked scope. Do not ask permission
   for reversible or read-only steps; prepare everything so approval is the last step.
 - Mid-task messages steer the current task. Status question -> one sentence, keep going.
+- `담당자 답: ...` at any level (asked by the human on their own): record it as the next A<n> in AGREEMENT.md (question, answer, effect); no effect -> note and continue. If it changes an H/S rule, criterion or the core: update TASK/DESIGN + `### D<n>`, reopen affected Plan slices (keep their core/periphery tag), re-brief running workers, and stop for the human only if a criterion changes.
 
 ## 2. Stages and handoff point
 Work follows skills `$level1`..`$level7` (recon -> interview -> goal contract -> approach +
@@ -94,9 +95,8 @@ and where it breaks. So:
 ## 8. Token and time economy
 - Never read big files whole: `head -n 40`, `wc -l`, column/schema summaries, `grep -n`.
 - No polling, no fixed sleeps, no loops that wait. The human runs the long-lived server in a tab they control; for verification you may start your own instance on a spare port and must stop it before you finish (CLEAN).
-- Subagents: off by default. Allowed only for one independent read-only review (level6) or a
-  clearly parallel lookup; give it TASK / DELIVERABLE / SCOPE / VERIFY / STOP WHEN and check
-  its evidence yourself.
+- Subagents: in level5 and the level6 fix loop you lead and workers build (`.agents/skills/level5/TEAM.md`;
+  `wait_agent` with a short timeout is allowed). Elsewhere only a parallel read-only lookup. Check their evidence yourself.
 
 ## 9. Environment safety
 - Do not touch `~/.codex/`, global config, IDE-managed settings, MCP connections,

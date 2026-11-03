@@ -1,10 +1,10 @@
 ---
 name: level5
-description: "Step 5 of 7 (build loop by Plan slice). Use after level4 returned OKAY and the human chose the core method in docs/DESIGN.md: builds the ## Plan slices of docs/TASK.md via READ -> CHANGE -> RUN -> CLEAN -> RECORD -> COMMIT. Periphery slices chain; every core slice, FAIL or criterion-changing assumption stops for the human. Repeat $level5 until all criteria pass; switch to level6 when all pass or the Freeze time is reached."
+description: "Step 5 of 7 (build loop by Plan slice). Use after level4 returned OKAY and the human chose the core method in docs/DESIGN.md: builds the ## Plan slices of docs/TASK.md via READ -> CHANGE -> RUN -> CLEAN -> RECORD -> COMMIT, the session leading parallel worker subagents (TEAM.md). Periphery slices chain; every core slice, FAIL or criterion-changing assumption stops for the human. Repeat $level5 until all criteria pass; switch to level6 when all pass or the Freeze time is reached."
 ---
 # level5 - build by Plan slice: READ -> CHANGE -> RUN -> CLEAN -> RECORD -> COMMIT
 
-Unit = one slice of `## Plan` in docs/TASK.md, in order; Slice 1 (thin end-to-end path) first.
+Unit = one `## Plan` slice of docs/TASK.md; Slice 1 first. You lead per TEAM.md: workers build, you verify.
 If the first pending slice is `core` (unmarked = core), build only that slice, then stop.
 Otherwise chain `periphery` slices: after COMMIT print `C<n> PASS|진행(k/n) | <evidence> | <short hash>`
 and take the next one. A red run you fix inside the slice does not stop the chain. STOP at:
