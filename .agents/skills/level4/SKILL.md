@@ -29,14 +29,14 @@ Get it right once; rewriting the core later costs more than this step.
    method that is clearly better than naive, fits the remaining time, and the human can explain.
    Show two product shapes: the minimum that passes the criteria, and what the in-house users
    would actually run day to day; name the IS rows each leaves unmet. Default to the second.
-   During research, `pip install` a proven solver (e.g. ortools) into ./.venv once, whatever you pick; log it in D1.
+   During research, `pip install` the proven library the core needs (a solver, a model, a parser) into ./.venv once; log it in D1.
 4. **Fix measurement before code:**
    - Metrics: primary objective + 2-3 secondary + violations counted per H-id of `조건 장부`.
    - Baselines: (a) the current process from the data/stakeholder - if it is described as a rule
      (e.g. "nearest ~5 per person"), implement that rule as baseline (a), do not mark it
      unmeasurable; (b) a naive method (the one a hurried engineer would write first). The chosen method must beat both.
    - Realism bounds: numbers that would look absurd to a practitioner (too many resources,
-     near-empty or over-full units, extreme max times, unserved items, solver runtime > ~30 s). Take them from
+     near-empty or over-full units, extreme max times, unserved items, core runtime > ~30 s). Take them from
      AGREEMENT or mark `assumed:`. These become checks in the core quality criterion. The main
      complaint about today's process must be a metric the chosen method improves, not a warning.
    - Small-case check: a tiny input where the answer is known by hand or brute force.
@@ -53,7 +53,7 @@ Get it right once; rewriting the core later costs more than this step.
 7. Draft `## Plan` in `docs/TASK.md`, max ~12 lines: vertical slices in dependency order.
    Slice 1 is a thin end-to-end path ending on the surface README names (screen, API or CLI). Each slice line:
    `S<k> [core|periphery] <what> - <files> - closes C<n>`. Core slices, one Plan line each, in this order:
-   evaluator + naive baseline (metrics written independently of the solver) -> chosen method seeded with the best baseline
+   evaluator + naive baseline (metrics written independently of the core) -> chosen method seeded with the best baseline
    -> comparison on the real input. Unsure = `core`; so is any slice that can fail only under simultaneous use or a restart.
 8. Self-check: every IS row has a criterion and a slice; every periphery slice traces to a
    criterion; no core step marked periphery. Commit, then ask the human to open a NEW Codex
