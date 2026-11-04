@@ -96,7 +96,7 @@ and where it breaks. So:
 - Never read big files whole: `head -n 40`, `wc -l`, column/schema summaries, `grep -n`.
 - No polling, no fixed sleeps, no loops that wait. The human runs the long-lived server in a tab they control; for verification you may start your own instance on a spare port and must stop it before you finish (CLEAN).
 - Subagents: in level5 and the level6 fix loop you lead and workers build (`.agents/skills/level5/TEAM.md`;
-  `wait_agent` with a short timeout is allowed). Elsewhere only a parallel read-only lookup. Check their evidence yourself.
+  `wait_agent` with a short timeout is allowed; never pass `model`, workers inherit yours). Elsewhere only a read-only lookup. Check their evidence.
 
 ## 9. Environment safety
 - Do not touch `~/.codex/`, global config, IDE-managed settings, MCP connections,

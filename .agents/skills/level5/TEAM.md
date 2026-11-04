@@ -3,6 +3,8 @@
 You are the **lead**: the session the human talks to. Workers and verifiers are native
 subagents (`spawn_agent` + `wait_agent`, or this Codex's equivalent). No subagent tool -> do the
 same steps yourself, one slice at a time.
+Model: never pass `model` or `reasoning_effort` when spawning; workers inherit this session's model.
+The human picks models; you never switch to or start a session on another model.
 Only the lead talks to the human, edits docs/ (Plan, VERIFICATION, DECISIONS, WORKLOG, HANDOFF),
 commits, and decides stops. Workers only change code in the files they own.
 
