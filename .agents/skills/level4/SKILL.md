@@ -51,10 +51,10 @@ Get it right once; rewriting the core later costs more than this step.
    once and is saved; a fresh start loads the saved result, never an empty page), deterministic code vs LLM
    with reason and cost, modules with one-line jobs.
 7. Draft `## Plan` in `docs/TASK.md`, max ~12 lines: vertical slices in dependency order.
-   Slice 1 is a thin end-to-end path (input -> output on the real surface). Each slice line:
-   `S<k> [core|periphery] <what> - <files> - closes C<n>`. Core slices, in this order:
+   Slice 1 is a thin end-to-end path ending on the surface README names (screen, API or CLI). Each slice line:
+   `S<k> [core|periphery] <what> - <files> - closes C<n>`. Core slices, one Plan line each, in this order:
    evaluator + naive baseline (metrics written independently of the solver) -> chosen method seeded with the best baseline
-   -> comparison on the real input. Unsure = `core` (core slices stop for the human).
+   -> comparison on the real input. Unsure = `core`; so is any slice that can fail only under simultaneous use or a restart.
 8. Self-check: every IS row has a criterion and a slice; every periphery slice traces to a
    criterion; no core step marked periphery. Commit, then ask the human to open a NEW Codex
    session with the review model (PROMPTS §0), paste this prompt verbatim, and STOP until the

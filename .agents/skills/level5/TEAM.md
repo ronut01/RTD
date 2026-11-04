@@ -11,6 +11,8 @@ commits, and decides stops. Workers only change code in the files they own.
 ## 1. Batch
 - From `## Plan`, take the pending slices whose file lists do not overlap. A file two slices need
   (e.g. the web entry point) gets one owner; the other slice waits for the next batch.
+- Token use is tracked: spawn workers only for real parallel work (2+ independent slices, or periphery
+  beside a long core); a single small slice you do yourself.
 - Periphery: all independent slices at once, at most 3 workers. Core: one worker for the core
   slice; independent periphery workers may run beside it. Core slices still stop for the human.
 
